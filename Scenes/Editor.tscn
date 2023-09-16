@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpbsx078wocty"]
+
+[ext_resource type="Script" path="res://Scripts/GraphCreator.gd" id="1_ab3ty"]
+[ext_resource type="PackedScene" uid="uid://bsxbb0ccvpx8u" path="res://Scenes/GraphControlPoint.tscn" id="2_3ygt8"]
+[ext_resource type="Script" path="res://Scripts/ViewController.gd" id="3_phoqq"]
+
+[node name="Editor" type="Node2D"]
+
+[node name="Graph" type="Node2D" parent="."]
+script = ExtResource("1_ab3ty")
+control_point_scene = ExtResource("2_3ygt8")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("3_phoqq")
