@@ -10,10 +10,15 @@ config_version=5
 
 [application]
 
-config/name="EconoDot"
+config/name="EconomicsPlotter"
 run/main_scene="res://Scenes/Editor.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+config/emulate_touch_from_mouse=true
+
+[autoload]
+
+Globals="*res://Scripts/Globals.gd"
 
 [dotnet]
 

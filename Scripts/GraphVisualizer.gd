@@ -2,17 +2,17 @@ extends Node2D
 
 
 @export var control_point_scene: PackedScene
-@export var control_rod_length := 100
+@onready var graphs = Globals.graphs
+@onready var selected_graph = Globals.selected_graph
 
-var graphs = {}
-var curve = Curve2D.new()
+#var curve = Curve2D.new()
+#var graphs = Globals.graphs
+var mode
 
 enum {
 	ADD,
 	EDIT
 }
-
-var mode
 
 
 func _process(_delta):
@@ -36,17 +36,19 @@ func _unhandled_input(event):
 
 
 func _draw():
-	var points = curve.tessellate()
-
-	if len(points) > 1:
-		draw_polyline(points, Color.RED, 1, true)
+	for graph in graphs:
+		var points = graphs[graph].curve.tessellate()
+		if len(points) > 1:
+			draw_polyline(points, graph.color, graph.width, true)
 
 
 func update_curve():
-	curve.clear_points()
+	#curve.clear_points()
 	# TODO
-	if graphs.has('point'):
-		for point in graphs['point']:
+	for graph_index in graphs:
+		var graph = graphs[graph_index]
+		graph.curve.clear_points()
+		for point in graph.points:
 			var handle_1
 			var handle_2
 			
@@ -59,20 +61,22 @@ func update_curve():
 			else:
 				handle_2 = point.handles[1].position
 				
-			curve.add_point(point.position, handle_1, handle_2)
+			graph.curve.add_point(point.position, handle_1, handle_2)
 	queue_redraw()
 
 
 func add_point():
+	if selected_graph == -1:
+		return
 	var point = control_point_scene.instantiate()
 	add_child(point)
 	point.global_position = get_global_mouse_position()
 	
 	var point_index = -1
 	var closest_point
-	if !graphs.has('point'):
-		graphs['point'] = []
-	graphs['point'].append(point)
+	if !graphs.has(selected_graph):
+		graphs[selected_graph] = []
+	graphs[selected_graph].points.append(point)
 	update_curve()
 
 #	Add the ability to make in-between points
