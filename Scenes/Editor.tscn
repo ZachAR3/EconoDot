@@ -1,14 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://bpbsx078wocty"]
+[gd_scene load_steps=7 format=3 uid="uid://bpbsx078wocty"]
 
 [ext_resource type="Script" path="res://Scripts/Editor.gd" id="1_32imw"]
 [ext_resource type="Script" path="res://Scripts/GraphVisualizer.gd" id="1_lv1lg"]
 [ext_resource type="PackedScene" uid="uid://bsxbb0ccvpx8u" path="res://Scenes/GraphControlPoint.tscn" id="2_8a8t4"]
+[ext_resource type="PackedScene" uid="uid://2m5l61gf471j" path="res://Scenes/ItemLineEdit.tscn" id="2_752ye"]
 [ext_resource type="Script" path="res://Scripts/ViewController.gd" id="3_1qmvv"]
+[ext_resource type="Script" path="res://Scripts/ItemListController.gd" id="5_k0d5x"]
 
 [node name="Editor" type="Node2D"]
 script = ExtResource("1_32imw")
+itemScene = ExtResource("2_752ye")
 
 [node name="GraphVisualizer" type="Node2D" parent="."]
+unique_name_in_owner = true
 script = ExtResource("1_lv1lg")
 control_point_scene = ExtResource("2_8a8t4")
 
@@ -16,6 +20,13 @@ control_point_scene = ExtResource("2_8a8t4")
 script = ExtResource("3_1qmvv")
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="UI"]
+anchors_preset = -1
+anchor_right = 0.3
+anchor_bottom = 1.0
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="GraphsDisplay" type="VBoxContainer" parent="UI"]
 anchors_preset = -1
@@ -25,26 +36,25 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/GraphsDisplay"]
+[node name="Header" type="HBoxContainer" parent="UI/GraphsDisplay"]
 layout_mode = 2
 
-[node name="AddGraph" type="Button" parent="UI/GraphsDisplay/HBoxContainer"]
+[node name="AddGraph" type="Button" parent="UI/GraphsDisplay/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Add"
 
-[node name="RemoveGraph" type="Button" parent="UI/GraphsDisplay/HBoxContainer"]
+[node name="RemoveGraph" type="Button" parent="UI/GraphsDisplay/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Remove
 "
 
-[node name="GraphsList" type="ItemList" parent="UI/GraphsDisplay"]
+[node name="GraphsList" type="VBoxContainer" parent="UI/GraphsDisplay"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-text_overrun_behavior = 4
+script = ExtResource("5_k0d5x")
 
-[connection signal="pressed" from="UI/GraphsDisplay/HBoxContainer/AddGraph" to="." method="add_graph"]
-[connection signal="pressed" from="UI/GraphsDisplay/HBoxContainer/RemoveGraph" to="." method="remove_graph"]
-[connection signal="item_selected" from="UI/GraphsDisplay/GraphsList" to="." method="item_selected"]
+[connection signal="pressed" from="UI/GraphsDisplay/Header/AddGraph" to="." method="add_graph"]
+[connection signal="pressed" from="UI/GraphsDisplay/Header/RemoveGraph" to="." method="remove_graph"]

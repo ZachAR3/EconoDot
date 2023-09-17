@@ -7,6 +7,8 @@ var hovered := false
 var grabbed = false
 var mouse_offset := Vector2.ZERO
 
+signal delete_control(control)
+
 
 func _ready():
 	pass # Replace with function body.
@@ -32,6 +34,9 @@ func _process(delta):
 	if grabbed:
 		velocity = ((mouse_position + mouse_offset) - global_position) * mouse_follow_speed
 		move_and_slide()
+	
+	if Input.is_action_just_pressed("Delete") && hovered:
+		delete_control.emit(self)
 
 
 func selection_updated(currently_selected):

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://2m5l61gf471j"]
+
+[ext_resource type="Script" path="res://Scripts/ItemClass.gd" id="1_3qurp"]
+
+[node name="LineEdit" type="LineEdit"]
+offset_right = 67.0625
+offset_bottom = 31.0
+editable = false
+script = ExtResource("1_3qurp")
+
+[connection signal="focus_exited" from="." to="." method="lost_focus"]
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="text_submitted" from="." to="." method="_on_text_submitted"]
