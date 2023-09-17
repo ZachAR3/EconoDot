@@ -46,11 +46,10 @@ func _draw():
 		var graph = Globals.graphs[graph_index]
 		var points = graph.curve.tessellate()
 		if len(points) > 1:
-			draw_polyline(points, graph.color, graph.width, true)
+			draw_polyline(points, graph.resources.color, graph.resources.width, true)
 
 
 func update_curve():
-	#curve.clear_points()
 	# TODO
 	for graph_index in Globals.graphs:
 		var graph = Globals.graphs[graph_index]
@@ -72,7 +71,7 @@ func update_curve():
 	queue_redraw()
 
 
-func add_point():
+func add_point(point_position := Vector2.INF):
 	if Globals.selected_graph == -1:
 		print("no graph selected")
 		return
@@ -84,10 +83,15 @@ func add_point():
 		
 	Globals.graphs[Globals.selected_graph].add_child(point)
 	point.delete_control.connect(remove_point)
-	point.global_position = get_global_mouse_position()
+	if point_position == Vector2.INF:
+		point.global_position = get_global_mouse_position()
+	else:
+		point.global_position = point_position
 	
 	Globals.graphs[Globals.selected_graph].points.append(point)
 	update_curve()
+	
+	return point
 
 
 func remove_point(point):

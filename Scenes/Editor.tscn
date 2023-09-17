@@ -11,13 +11,13 @@
 script = ExtResource("1_32imw")
 itemScene = ExtResource("2_752ye")
 
+[node name="GraphCamera" type="Camera2D" parent="."]
+script = ExtResource("3_1qmvv")
+
 [node name="GraphVisualizer" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("1_lv1lg")
 control_point_scene = ExtResource("2_8a8t4")
-
-[node name="GraphCamera" type="Camera2D" parent="GraphVisualizer"]
-script = ExtResource("3_1qmvv")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
