@@ -8,12 +8,8 @@ class_name Draggable
 @export var snap_position := Vector2.ZERO
 
 var hovered := false
-var grabbed := false : 
-	set (value):
-		grabbed = value
-		grabbed_updated(value)
-	get:
-		return grabbed
+var grabbed := false
+var selected := false
 		
 var mouse_offset : Vector2
 var mouse_position : Vector2
@@ -27,6 +23,7 @@ func _ready():
 func _unhandled_input(event):
 	if event.is_action_pressed("Select"):
 		grabbed = hovered && !grabbed
+		selection_updated(true)
 	if event.is_action_released("Select"):
 		grabbed = false
 	if event is InputEventMouseMotion:
@@ -54,12 +51,11 @@ func move(new_position : Vector2):
 
 
 # Added for functions which need to know when grabbed is updated
-func grabbed_updated(_grabbed : bool):
-	pass
+func selection_updated(_selected : bool):
+	selected = _selected
 
 
 func _mouse_entered():
-	print("HI")
 	hovered = true
 
 

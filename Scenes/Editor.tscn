@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpbsx078wocty"]
+[gd_scene load_steps=9 format=3 uid="uid://bpbsx078wocty"]
 
 [ext_resource type="Script" path="res://Scripts/Editor.gd" id="1_32imw"]
 [ext_resource type="Script" path="res://Scripts/GraphVisualizer.gd" id="1_lv1lg"]
@@ -6,7 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://2m5l61gf471j" path="res://Scenes/ItemLineEdit.tscn" id="2_752ye"]
 [ext_resource type="Script" path="res://Scripts/ViewController.gd" id="3_1qmvv"]
 [ext_resource type="PackedScene" uid="uid://bls1xbvvuh4cn" path="res://Scenes/Axis.tscn" id="3_2nxg0"]
-[ext_resource type="Script" path="res://Scripts/ItemListController.gd" id="5_k0d5x"]
+[ext_resource type="Script" path="res://Scripts/ItemListBase.gd" id="7_gfjl3"]
+[ext_resource type="PackedScene" uid="uid://kctlpbwxtd68" path="res://Scenes/GraphPreviewBase.tscn" id="8_ccv5q"]
 
 [node name="Editor" type="Node2D"]
 script = ExtResource("1_32imw")
@@ -31,7 +32,7 @@ anchor_bottom = 1.0
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="GraphsDisplay" type="VBoxContainer" parent="UI"]
+[node name="SideBar" type="VBoxContainer" parent="UI"]
 anchors_preset = -1
 anchor_right = 0.298958
 anchor_bottom = 1.0
@@ -39,25 +40,37 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Header" type="HBoxContainer" parent="UI/GraphsDisplay"]
+[node name="Header" type="HBoxContainer" parent="UI/SideBar"]
 layout_mode = 2
 
-[node name="AddGraph" type="Button" parent="UI/GraphsDisplay/Header"]
+[node name="AddGraph" type="Button" parent="UI/SideBar/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Add"
 
-[node name="RemoveGraph" type="Button" parent="UI/GraphsDisplay/Header"]
+[node name="RemoveGraph" type="Button" parent="UI/SideBar/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Remove
 "
 
-[node name="GraphsList" type="VBoxContainer" parent="UI/GraphsDisplay"]
+[node name="GraphsList" type="VBoxContainer" parent="UI/SideBar"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("5_k0d5x")
+script = ExtResource("7_gfjl3")
 
-[connection signal="pressed" from="UI/GraphsDisplay/Header/AddGraph" to="." method="add_graph"]
-[connection signal="pressed" from="UI/GraphsDisplay/Header/RemoveGraph" to="." method="remove_graph"]
+[node name="GraphsPreview" type="GridContainer" parent="UI/SideBar"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+script = ExtResource("7_gfjl3")
+
+[node name="GraphPreview" parent="UI/SideBar/GraphsPreview" instance=ExtResource("8_ccv5q")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch_mode = 4
+
+[connection signal="pressed" from="UI/SideBar/Header/AddGraph" to="." method="add_graph"]
+[connection signal="pressed" from="UI/SideBar/Header/RemoveGraph" to="." method="remove_graph"]

@@ -43,7 +43,7 @@ func _unhandled_input(event):
 
 func _draw():
 	for graph in Globals.graphs:
-		var points = graph.curve.tessellate()
+		var points = graph.curve.tessellate(5, 2)
 		if len(points) > 1:
 			draw_polyline(points, graph.resources.color, graph.resources.width, true)
 

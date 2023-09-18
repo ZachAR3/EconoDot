@@ -26,7 +26,6 @@ func load_graph(graph_path : String):
 
 
 func add_graph() -> int:
-	print(Globals.graphs)
 #	Adds our new graph to the list and to our global graphs dictionary and initializing the points list
 	var item = itemScene.instantiate()
 	item.selected.connect(item_selected)
@@ -38,7 +37,8 @@ func add_graph() -> int:
 
 
 func remove_graph():
-	if Globals.selected_graph != -1 && len(Globals.graphs) > 0:
+	# Checks if our graph is valid within the list
+	if Globals.selected_graph >= max(Globals.graphs.size() -1, 0):
 		for point in Globals.graphs[Globals.selected_graph].points.duplicate():
 			graph_visualizer.remove_point(point)
 			
@@ -46,6 +46,10 @@ func remove_graph():
 		Globals.graphs[Globals.selected_graph].queue_free()
 		graphs_list.remove_item(Globals.selected_graph)
 		Globals.graphs.remove_at(Globals.selected_graph)
+		# Set to avoid index errors
+		Globals.selected_graph = -1
+	else:
+		print("cannot find graph at index:", Globals.selected_graph)
 
 
 func item_selected(index):
