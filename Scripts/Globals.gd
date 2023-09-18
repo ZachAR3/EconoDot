@@ -1,7 +1,7 @@
 extends Node
 
 
-var graphs = {}
+var graphs = []
 var selected_graph = -1
 
 # Colors

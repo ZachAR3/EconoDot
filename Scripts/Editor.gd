@@ -26,25 +26,26 @@ func load_graph(graph_path : String):
 
 
 func add_graph() -> int:
+	print(Globals.graphs)
 #	Adds our new graph to the list and to our global graphs dictionary and initializing the points list
 	var item = itemScene.instantiate()
 	item.selected.connect(item_selected)
 	var new_graph = Graph.new()
 	graph_visualizer.add_child(new_graph)
 	var index = graphs_list.add_item("New graph", item)
-	Globals.graphs[index] = new_graph
+	Globals.graphs.insert(index, new_graph)
 	return index
 
 
 func remove_graph():
-	if Globals.selected_graph != -1:
+	if Globals.selected_graph != -1 && len(Globals.graphs) > 0:
 		for point in Globals.graphs[Globals.selected_graph].points.duplicate():
 			graph_visualizer.remove_point(point)
 			
 		# Removes the Graph class orphan
 		Globals.graphs[Globals.selected_graph].queue_free()
 		graphs_list.remove_item(Globals.selected_graph)
-		Globals.graphs.erase(Globals.selected_graph)
+		Globals.graphs.remove_at(Globals.selected_graph)
 
 
 func item_selected(index):

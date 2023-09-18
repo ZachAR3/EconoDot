@@ -42,8 +42,7 @@ func _unhandled_input(event):
 
 
 func _draw():
-	for graph_index in Globals.graphs:
-		var graph = Globals.graphs[graph_index]
+	for graph in Globals.graphs:
 		var points = graph.curve.tessellate()
 		if len(points) > 1:
 			draw_polyline(points, graph.resources.color, graph.resources.width, true)
@@ -51,8 +50,7 @@ func _draw():
 
 func update_curve():
 	# TODO
-	for graph_index in Globals.graphs:
-		var graph = Globals.graphs[graph_index]
+	for graph in Globals.graphs:
 		graph.curve.clear_points()
 		for point in graph.points:
 			var handle_1
@@ -78,8 +76,8 @@ func add_point(point_position := Vector2.INF):
 	var point = control_point_scene.instantiate()
 	var point_index = -1
 	var closest_point
-	if !Globals.graphs.has(Globals.selected_graph):
-		Globals.graphs[Globals.selected_graph] = []
+#	if !Globals.graphs.has(Globals.selected_graph):
+#		Globals.graphs[Globals.selected_graph] = []
 		
 	Globals.graphs[Globals.selected_graph].add_child(point)
 	point.delete_control.connect(remove_point)
