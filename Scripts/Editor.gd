@@ -8,11 +8,10 @@ extends Node2D
 @export var itemScene : PackedScene
 
 
-func _input(event):
-	if event is InputEventKey:
-		print("hi")
-		if event.is_action_pressed("ui_accept"):
-			load_graph("res://graph.res")
+#func _input(event):
+#	if event is InputEventKey:
+#		if event.is_action_pressed("ui_accept"):
+#			load_graph("res://graph.res")
 
 
 func load_graph(graph_path : String):

@@ -57,3 +57,7 @@ Move={
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0.137255, 0.239216, 0.301961, 1)

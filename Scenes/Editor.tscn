@@ -1,15 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://bpbsx078wocty"]
+[gd_scene load_steps=8 format=3 uid="uid://bpbsx078wocty"]
 
 [ext_resource type="Script" path="res://Scripts/Editor.gd" id="1_32imw"]
 [ext_resource type="Script" path="res://Scripts/GraphVisualizer.gd" id="1_lv1lg"]
 [ext_resource type="PackedScene" uid="uid://bsxbb0ccvpx8u" path="res://Scenes/GraphControlPoint.tscn" id="2_8a8t4"]
 [ext_resource type="PackedScene" uid="uid://2m5l61gf471j" path="res://Scenes/ItemLineEdit.tscn" id="2_752ye"]
 [ext_resource type="Script" path="res://Scripts/ViewController.gd" id="3_1qmvv"]
+[ext_resource type="PackedScene" uid="uid://bls1xbvvuh4cn" path="res://Scenes/Axis.tscn" id="3_2nxg0"]
 [ext_resource type="Script" path="res://Scripts/ItemListController.gd" id="5_k0d5x"]
 
 [node name="Editor" type="Node2D"]
 script = ExtResource("1_32imw")
 itemScene = ExtResource("2_752ye")
+
+[node name="Axis" parent="." instance=ExtResource("3_2nxg0")]
 
 [node name="GraphCamera" type="Camera2D" parent="."]
 script = ExtResource("3_1qmvv")
