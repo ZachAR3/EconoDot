@@ -1,4 +1,4 @@
-extends Draggable
+extends Draggable2D
 
 @export var oppisite_handle : Area2D
 @export var start_offset := Vector2(30, 0)

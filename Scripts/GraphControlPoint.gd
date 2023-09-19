@@ -1,4 +1,4 @@
-extends Draggable
+extends Draggable2D
 
 
 @export var handles : Array[Area2D]

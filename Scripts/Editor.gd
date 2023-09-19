@@ -1,11 +1,12 @@
 extends Node2D
 
 
+@onready var graphs_explorer = %GraphsPreview
 @onready var graphs_list = %GraphsList
 @onready var graph_visualizer = %GraphVisualizer
 @onready var save_manager = SaveManager.new()
 
-@export var itemScene : PackedScene
+@export var graphItemScene : PackedScene
 
 
 #func _input(event):
@@ -14,8 +15,8 @@ extends Node2D
 #			load_graph("res://graph.res")
 
 
-func load_graph(graph_path : String):
-	var loaded_graph_resources = save_manager.load_graph(graph_path)
+func load_graph(graph_path : String, graph_object : GraphResource = GraphResource.new()):
+	var loaded_graph_resources = save_manager.load_graph(graph_path) if !graph_path.is_empty() else graph_object
 	# Adds a new graph item to house the loaded points
 	Globals.selected_graph = add_graph()
 	# Adds all points from given resource
@@ -27,11 +28,11 @@ func load_graph(graph_path : String):
 
 func add_graph() -> int:
 #	Adds our new graph to the list and to our global graphs dictionary and initializing the points list
-	var item = itemScene.instantiate()
-	item.selected.connect(item_selected)
+	var graph = graphItemScene.instantiate()
+	graph.item_selected.connect(item_selected)
 	var new_graph = Graph.new()
 	graph_visualizer.add_child(new_graph)
-	var index = graphs_list.add_item("New graph", item)
+	var index = graphs_list.add_item("New graph", graph)
 	Globals.graphs.insert(index, new_graph)
 	return index
 

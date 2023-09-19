@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://kctlpbwxtd68"]
+
+[ext_resource type="Script" path="res://Scripts/ItemClass.gd" id="1_ad807"]
+[ext_resource type="Texture2D" uid="uid://cg4v2e5hsuxfp" path="res://icon.svg" id="1_y0t7h"]
+[ext_resource type="Script" path="res://Scripts/GraphPreviewItem.gd" id="2_jbfbq"]
+
+[node name="GraphPreview" type="Control"]
+layout_mode = 3
+anchor_left = -0.059
+anchor_top = -0.101
+anchor_right = 0.051
+anchor_bottom = 0.107
+offset_left = 67.968
+offset_top = 65.448
+offset_right = -58.752
+offset_bottom = -69.336
+script = ExtResource("1_ad807")
+
+[node name="GraphPreviewImage" type="TextureRect" parent="."]
+unique_name_in_owner = true
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_y0t7h")
+script = ExtResource("2_jbfbq")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="double_clicked" from="." to="GraphPreviewImage" method="_add_graph"]

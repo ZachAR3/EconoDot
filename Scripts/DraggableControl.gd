@@ -1,6 +1,6 @@
-extends CollisionObject2D
+extends Control
 
-class_name Draggable
+class_name DraggableControl
 
 
 @export var snap := true
@@ -9,7 +9,6 @@ class_name Draggable
 
 var hovered := false
 var grabbed := false
-var selected := false
 		
 var mouse_offset : Vector2
 var mouse_position : Vector2
@@ -20,7 +19,7 @@ func _ready():
 	mouse_exited.connect(_mouse_exited)
 
 
-func _unhandled_input(event):
+func _gui_input(event):
 	if event.is_action_pressed("Select"):
 		grabbed = hovered && !grabbed
 		selection_updated(true)
@@ -51,8 +50,9 @@ func move(new_position : Vector2):
 
 
 # Added for functions which need to know when grabbed is updated
-func selection_updated(_selected : bool):
-	selected = _selected
+func selection_updated(selected : bool):
+#	Serves as an override to be used off of
+	pass
 
 
 func _mouse_entered():

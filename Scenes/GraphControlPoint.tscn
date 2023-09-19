@@ -4,17 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://dww6hatkl2r3q" path="res://Scenes/GraphControlHandle.tscn" id="2_ryi8i"]
 [ext_resource type="Texture2D" uid="uid://0xa3ydswpc6h" path="res://Textures/ControlPoint.svg" id="2_uscam"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2w2uv"]
-size = Vector2(23, 23)
+[sub_resource type="CircleShape2D" id="CircleShape2D_lwskf"]
 
 [node name="ControlPoint" type="Area2D" node_paths=PackedStringArray("handles")]
 script = ExtResource("2_a5dw6")
 handles = [NodePath("Handle1"), NodePath("Handle2")]
 
-[node name="CollisionCollider" type="CollisionShape2D" parent="."]
-position = Vector2(-1.90735e-06, 0)
-scale = Vector2(0.999999, 0.999999)
-shape = SubResource("RectangleShape2D_2w2uv")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lwskf")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.05, 0.05)
@@ -26,3 +23,4 @@ start_offset = Vector2(-30, 0)
 
 [node name="Handle2" parent="." node_paths=PackedStringArray("oppisite_handle") instance=ExtResource("2_ryi8i")]
 oppisite_handle = NodePath("../Handle1")
+metadata/_edit_use_anchors_ = true

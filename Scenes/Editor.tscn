@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bpbsx078wocty"]
+[gd_scene load_steps=11 format=3 uid="uid://bpbsx078wocty"]
 
 [ext_resource type="Script" path="res://Scripts/Editor.gd" id="1_32imw"]
 [ext_resource type="Script" path="res://Scripts/GraphVisualizer.gd" id="1_lv1lg"]
@@ -7,11 +7,13 @@
 [ext_resource type="Script" path="res://Scripts/ViewController.gd" id="3_1qmvv"]
 [ext_resource type="PackedScene" uid="uid://bls1xbvvuh4cn" path="res://Scenes/Axis.tscn" id="3_2nxg0"]
 [ext_resource type="Script" path="res://Scripts/ItemListBase.gd" id="7_gfjl3"]
-[ext_resource type="PackedScene" uid="uid://kctlpbwxtd68" path="res://Scenes/GraphPreviewBase.tscn" id="8_ccv5q"]
+[ext_resource type="PackedScene" uid="uid://kctlpbwxtd68" path="res://Scenes/GraphPreviewItem.tscn" id="8_ccv5q"]
+[ext_resource type="Script" path="res://Scripts/GraphsPreview.gd" id="8_eqy0j"]
+[ext_resource type="Resource" uid="uid://bub5xqowfipnw" path="res://graph.res" id="9_w0djb"]
 
 [node name="Editor" type="Node2D"]
 script = ExtResource("1_32imw")
-itemScene = ExtResource("2_752ye")
+graphItemScene = ExtResource("2_752ye")
 
 [node name="Axis" parent="." instance=ExtResource("3_2nxg0")]
 
@@ -60,17 +62,15 @@ layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("7_gfjl3")
 
-[node name="GraphsPreview" type="GridContainer" parent="UI/SideBar"]
+[node name="GraphsPreview" type="GridContainer" parent="UI/SideBar" node_paths=PackedStringArray("editor")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 columns = 2
-script = ExtResource("7_gfjl3")
-
-[node name="GraphPreview" parent="UI/SideBar/GraphsPreview" instance=ExtResource("8_ccv5q")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-stretch_mode = 4
+script = ExtResource("8_eqy0j")
+editor = NodePath("../../..")
+premade_graphs = Array[Resource("res://Scripts/GraphResource.gd")]([ExtResource("9_w0djb")])
+graph_preview_scene = ExtResource("8_ccv5q")
 
 [connection signal="pressed" from="UI/SideBar/Header/AddGraph" to="." method="add_graph"]
 [connection signal="pressed" from="UI/SideBar/Header/RemoveGraph" to="." method="remove_graph"]
