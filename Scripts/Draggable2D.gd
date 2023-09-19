@@ -11,7 +11,6 @@ var hovered := false
 var grabbed := false
 		
 var mouse_offset : Vector2
-var mouse_position : Vector2
 
 
 func _ready():
@@ -26,19 +25,16 @@ func _unhandled_input(event):
 	if event.is_action_released("Select"):
 		grabbed = false
 	if event is InputEventMouseMotion:
-		mouse_position = event.global_position
 		if grabbed:
 			follow_mouse()
 			queue_redraw()
 		else:
-			mouse_offset = Vector2(global_position.x - mouse_position.x, global_position.y - mouse_position.y)
+			var mouse_pos = get_global_mouse_position()
+			mouse_offset = Vector2(global_position.x - mouse_pos.x, global_position.y - mouse_pos.y)
 
 
 func follow_mouse():
-	if !grabbed:
-		mouse_offset = Vector2(global_position.x - mouse_position.x, global_position.y - mouse_position.y)
-		
-	var target_position = mouse_position + mouse_offset
+	var target_position = get_global_mouse_position() + mouse_offset
 	target_position = Globals.snap(snap_position, target_position, snap_threshold) if snap else target_position
 	
 	move(target_position)
