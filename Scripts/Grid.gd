@@ -16,9 +16,9 @@ func _process(delta):
 
 func _draw():
 	# Draw X Axis
-	var grid_offset_x = DisplayServer.window_get_size().x * (abs(camera.global_position.x) + 1)
+	var grid_offset_x = DisplayServer.window_get_size().x * (abs(camera.global_position.x) + 1) / camera.zoom.x # 1 is added to counter 0 giving nothing
 	draw_line(Vector2.ZERO + Vector2.LEFT * grid_offset_x, Vector2.RIGHT * grid_offset_x, Color.RED, 1 / camera.zoom.x, true)
 	
 	# Draw Y axix
-	var grid_offset_y = DisplayServer.window_get_size().y * (abs(camera.global_position.y) + 1) # 1 is added to counter 0 giving nothing
+	var grid_offset_y = DisplayServer.window_get_size().y * (abs(camera.global_position.y) + 1) / camera.zoom.y # 1 is added to counter 0 giving nothing
 	draw_line(Vector2.ZERO + Vector2.UP * grid_offset_y, Vector2.DOWN * grid_offset_y, Color.BLUE, 1 / camera.zoom.x, true)
