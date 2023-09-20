@@ -20,3 +20,7 @@ func snap(snap_position : Vector2, current_position : Vector2, snap_threshold : 
 	if abs(current_position.y - snap_position.y) < snap_threshold:
 		snapped_position.y = snap_position.y
 	return snapped_position
+
+
+func get_first_in_group(node, group_name):
+	return node.get_children().filter(func(child): return group_name in child.get_groups()).front()

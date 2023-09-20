@@ -3,11 +3,26 @@
 [ext_resource type="Script" path="res://Scripts/ItemClass.gd" id="1_3qurp"]
 [ext_resource type="Script" path="res://Scripts/GraphItem.gd" id="1_d1l61"]
 
-[node name="GraphItem" type="Control"]
-layout_mode = 3
-anchors_preset = 15
+[node name="GraphItem" type="LineEdit"]
+anchors_preset = -1
+anchor_top = 0.47608
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.52392
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+editable = false
+script = ExtResource("1_d1l61")
+metadata/_edit_use_anchors_ = true
+
+[node name="GraphItemBase" type="Control" parent="." groups=["Item"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -15,18 +30,7 @@ size_flags_vertical = 3
 script = ExtResource("1_3qurp")
 metadata/_edit_use_anchors_ = true
 
-[node name="LineEdit" type="LineEdit" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-editable = false
-script = ExtResource("1_d1l61")
-metadata/_edit_use_anchors_ = true
-
-[connection signal="double_clicked" from="." to="LineEdit" method="_double_clicked"]
-[connection signal="focus_exited" from="LineEdit" to="LineEdit" method="_lost_focus"]
-[connection signal="gui_input" from="LineEdit" to="." method="_gui_input"]
-[connection signal="text_submitted" from="LineEdit" to="LineEdit" method="_on_text_submitted"]
+[connection signal="focus_exited" from="." to="." method="_lost_focus"]
+[connection signal="gui_input" from="." to="GraphItemBase" method="_gui_input"]
+[connection signal="text_submitted" from="." to="." method="_on_text_submitted"]
+[connection signal="double_clicked" from="GraphItemBase" to="." method="_double_clicked"]

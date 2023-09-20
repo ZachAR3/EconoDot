@@ -3,29 +3,36 @@ extends Container
 
 class_name ItemListBase
 
+@export var item_group : String
+
 var items = []
 
 signal item_selected(index : int)
 signal double_clicked()
 
 
+func is_item_in_group(object, group):
+	return group in object.get_groups()
+
+
 func add_item(text : String, item_object, index := -1) -> int:
-	#var item = item_object.item #Grabs the child item from the item object
+	var item_info = Globals.get_first_in_group(item_object, item_group)
 	if index == -1:
 		items.append(item_object)
-		item_object.index = max(len(items) -1, 0)
+		item_info.index = max(len(items) -1, 0)
 	else:
 		items.insert(index, item_object)
-		item_object.index = index
+		item_info.index = index
 		# TODO
 		var object_index = index
 		while object_index < len(items):
-			items[object_index].index += 1
+			#TODO
+			#items[object_index].index += 1
 			object_index += 1
 	add_child(item_object)
-	item_object.item_selected.connect(_item_selected)
-	item_object.double_clicked.connect(_double_clicked)
-	return item_object.index
+	item_info.item_selected.connect(_item_selected)
+	item_info.double_clicked.connect(_double_clicked)
+	return item_info.index
 
 
 func remove_item(index : int):
@@ -35,7 +42,7 @@ func remove_item(index : int):
 	# Update object indexes (TODO)
 	var object_index = index
 	while object_index < len(items):
-		items[object_index].index -= 1
+		Globals.get_first_in_group(items[object_index], item_group).index -= 1
 		object_index += 1
 	
 	items[index].queue_free()

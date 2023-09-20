@@ -27,50 +27,66 @@ control_point_scene = ExtResource("2_8a8t4")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Panel" type="Panel" parent="UI"]
+[node name="PanelContainer" type="PanelContainer" parent="UI"]
 anchors_preset = -1
-anchor_right = 0.3
-anchor_bottom = 1.0
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="SideBar" type="VBoxContainer" parent="UI"]
-anchors_preset = -1
-anchor_right = 0.298958
+anchor_right = 0.2
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Header" type="HBoxContainer" parent="UI/SideBar"]
+[node name="SideBar" type="VBoxContainer" parent="UI/PanelContainer"]
 layout_mode = 2
+metadata/_edit_use_anchors_ = true
 
-[node name="AddGraph" type="Button" parent="UI/SideBar/Header"]
+[node name="Header" type="HBoxContainer" parent="UI/PanelContainer/SideBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="AddGraph" type="Button" parent="UI/PanelContainer/SideBar/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Add"
 
-[node name="RemoveGraph" type="Button" parent="UI/SideBar/Header"]
+[node name="RemoveGraph" type="Button" parent="UI/PanelContainer/SideBar/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Remove
 "
 
-[node name="GraphsList" type="VBoxContainer" parent="UI/SideBar"]
-unique_name_in_owner = true
+[node name="GraphItems" type="VSplitContainer" parent="UI/PanelContainer/SideBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GraphsListContainer" type="ScrollContainer" parent="UI/PanelContainer/SideBar/GraphItems"]
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("7_gfjl3")
 
-[node name="GraphsPreview" type="GridContainer" parent="UI/SideBar" node_paths=PackedStringArray("editor")]
+[node name="GraphsList" type="VBoxContainer" parent="UI/PanelContainer/SideBar/GraphItems/GraphsListContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("7_gfjl3")
+item_group = "Item"
+
+[node name="GraphsPreviewContainer" type="ScrollContainer" parent="UI/PanelContainer/SideBar/GraphItems"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GraphsPreview" type="GridContainer" parent="UI/PanelContainer/SideBar/GraphItems/GraphsPreviewContainer" node_paths=PackedStringArray("editor")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
 script = ExtResource("8_eqy0j")
-editor = NodePath("../../..")
+editor = NodePath("../../../../../..")
 premade_graphs = Array[Resource("res://Scripts/GraphResource.gd")]([ExtResource("9_w0djb")])
 graph_preview_scene = ExtResource("8_ccv5q")
+item_group = "Item"
 
-[connection signal="pressed" from="UI/SideBar/Header/AddGraph" to="." method="add_graph"]
-[connection signal="pressed" from="UI/SideBar/Header/RemoveGraph" to="." method="remove_graph"]
+[connection signal="pressed" from="UI/PanelContainer/SideBar/Header/AddGraph" to="." method="add_graph"]
+[connection signal="pressed" from="UI/PanelContainer/SideBar/Header/RemoveGraph" to="." method="remove_graph"]

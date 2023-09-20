@@ -29,7 +29,8 @@ func load_graph(graph_path : String, graph_object : GraphResource = GraphResourc
 func add_graph() -> int:
 #	Adds our new graph to the list and to our global graphs dictionary and initializing the points list
 	var graph = graphItemScene.instantiate()
-	graph.item_selected.connect(item_selected)
+	# A bit unecessary... TODO if changing back to grabbing by name or giving it as an exported variable
+	Globals.get_first_in_group(graph, "Item").item_selected.connect(item_selected)
 	var new_graph = Graph.new()
 	graph_visualizer.add_child(new_graph)
 	var index = graphs_list.add_item("New graph", graph)
@@ -39,7 +40,7 @@ func add_graph() -> int:
 
 func remove_graph():
 	# Checks if our graph is valid within the list
-	if Globals.selected_graph >= max(Globals.graphs.size() -1, 0):
+	if (0 <= Globals.selected_graph && Globals.selected_graph < Globals.graphs.size()):
 		for point in Globals.graphs[Globals.selected_graph].points.duplicate():
 			graph_visualizer.remove_point(point)
 			
