@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bls1xbvvuh4cn"]
 
-[ext_resource type="Script" path="res://Scripts/Grid.gd" id="1_t7rbu"]
+[ext_resource type="Script" path="res://Scripts/AxisBase.gd" id="1_n2unt"]
 
 [node name="Axis" type="Node2D"]
-script = ExtResource("1_t7rbu")
+script = ExtResource("1_n2unt")

@@ -25,6 +25,8 @@ func move(new_position : Vector2):
 
 func selection_updated(currently_selected : bool):
 	super(currently_selected)
+	if currently_selected:
+		Globals.selected_item = self
 	for handle in handles:
 		handle.visible = currently_selected
 

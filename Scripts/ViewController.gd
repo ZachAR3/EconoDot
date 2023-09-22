@@ -8,6 +8,8 @@ const ZOOM_RATE := 8.0
 
 var target_zoom := 1.0
 
+signal camera_moved
+
 
 func _physics_process(delta) -> void:
 	zoom = lerp(
@@ -16,11 +18,14 @@ func _physics_process(delta) -> void:
 		ZOOM_RATE * delta
 	)
 	set_physics_process(!is_equal_approx(zoom.x, target_zoom))
+	
+	camera_moved.emit()
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if event.button_mask == MOUSE_BUTTON_MASK_MIDDLE:
+			camera_moved.emit()
 			position -= event.relative / zoom
 	if event is InputEventMouseButton:
 		if event.is_pressed():

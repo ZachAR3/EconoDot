@@ -30,6 +30,8 @@ func add_item(text : String, item_object, index := -1) -> int:
 			#items[object_index].index += 1
 			object_index += 1
 	add_child(item_object)
+	if "text" in item_object:
+		item_object.text = text
 	item_info.item_selected.connect(_item_selected)
 	item_info.double_clicked.connect(_double_clicked)
 	return item_info.index

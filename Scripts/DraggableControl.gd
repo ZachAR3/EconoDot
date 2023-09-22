@@ -22,7 +22,7 @@ func _ready():
 func _gui_input(event):
 	if event.is_action_pressed("Select"):
 		grabbed = hovered && !grabbed
-		selection_updated(true)
+		selection_updated(hovered)
 	if event.is_action_released("Select"):
 		grabbed = false
 	if event is InputEventMouseMotion:

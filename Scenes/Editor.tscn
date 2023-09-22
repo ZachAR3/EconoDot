@@ -6,16 +6,23 @@
 [ext_resource type="PackedScene" uid="uid://2m5l61gf471j" path="res://Scenes/ItemLineEdit.tscn" id="2_752ye"]
 [ext_resource type="Script" path="res://Scripts/ViewController.gd" id="3_1qmvv"]
 [ext_resource type="PackedScene" uid="uid://bls1xbvvuh4cn" path="res://Scenes/Axis.tscn" id="3_2nxg0"]
+[ext_resource type="Script" path="res://Scripts/Grid.gd" id="4_j68ae"]
 [ext_resource type="Script" path="res://Scripts/ItemListBase.gd" id="7_gfjl3"]
-[ext_resource type="PackedScene" uid="uid://kctlpbwxtd68" path="res://Scenes/GraphPreviewItem.tscn" id="8_ccv5q"]
 [ext_resource type="Script" path="res://Scripts/GraphsPreview.gd" id="8_eqy0j"]
-[ext_resource type="Resource" uid="uid://bub5xqowfipnw" path="res://graph.res" id="9_w0djb"]
+[ext_resource type="PackedScene" uid="uid://c8p0rq85bfrc3" path="res://Scenes/PremadeGraphs/Supply.tscn" id="9_rdehx"]
 
 [node name="Editor" type="Node2D"]
 script = ExtResource("1_32imw")
 graphItemScene = ExtResource("2_752ye")
 
 [node name="Axis" parent="." instance=ExtResource("3_2nxg0")]
+
+[node name="Grid" type="Node2D" parent="."]
+z_index = -1
+script = ExtResource("4_j68ae")
+position_vector = Vector2(200, 200)
+verticalColor = Color(0.768627, 0.32549, 0.0627451, 1)
+horizontalColor = Color(0.333333, 0.588235, 0.556863, 1)
 
 [node name="GraphCamera" type="Camera2D" parent="."]
 script = ExtResource("3_1qmvv")
@@ -26,6 +33,15 @@ script = ExtResource("1_lv1lg")
 control_point_scene = ExtResource("2_8a8t4")
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="LineEdit" type="LineEdit" parent="UI"]
+anchors_preset = -1
+anchor_left = 0.8
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+metadata/_edit_use_anchors_ = true
 
 [node name="PanelContainer" type="PanelContainer" parent="UI"]
 anchors_preset = -1
@@ -84,8 +100,7 @@ size_flags_vertical = 3
 columns = 2
 script = ExtResource("8_eqy0j")
 editor = NodePath("../../../../../..")
-premade_graphs = Array[Resource("res://Scripts/GraphResource.gd")]([ExtResource("9_w0djb")])
-graph_preview_scene = ExtResource("8_ccv5q")
+premade_graphs = Array[PackedScene]([ExtResource("9_rdehx")])
 item_group = "Item"
 
 [connection signal="pressed" from="UI/PanelContainer/SideBar/Header/AddGraph" to="." method="add_graph"]

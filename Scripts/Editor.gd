@@ -12,13 +12,18 @@ extends Node2D
 #func _input(event):
 #	if event is InputEventKey:
 #		if event.is_action_pressed("ui_accept"):
-#			load_graph("res://graph.res")
+#			save_manager.save_graph(Globals.graphs[Globals.selected_graph])
+
+
+func _process(delta):
+	if Globals.selected_item:
+		$UI/LineEdit.text = str(Globals.selected_item.global_position)
 
 
 func load_graph(graph_path : String, graph_object : GraphResource = GraphResource.new()):
 	var loaded_graph_resources = save_manager.load_graph(graph_path) if !graph_path.is_empty() else graph_object
 	# Adds a new graph item to house the loaded points
-	Globals.selected_graph = add_graph()
+	Globals.selected_graph = add_graph(loaded_graph_resources.name)
 	# Adds all points from given resource
 	for point in loaded_graph_resources.points:
 		var new_point = graph_visualizer.add_point(point)
@@ -26,14 +31,15 @@ func load_graph(graph_path : String, graph_object : GraphResource = GraphResourc
 		new_point.handles[1].global_position = loaded_graph_resources.points[point][1]
 
 
-func add_graph() -> int:
+func add_graph(title := "New graph") -> int:
 #	Adds our new graph to the list and to our global graphs dictionary and initializing the points list
 	var graph = graphItemScene.instantiate()
 	# A bit unecessary... TODO if changing back to grabbing by name or giving it as an exported variable
 	Globals.get_first_in_group(graph, "Item").item_selected.connect(item_selected)
 	var new_graph = Graph.new()
+	#new_graph.text = title
 	graph_visualizer.add_child(new_graph)
-	var index = graphs_list.add_item("New graph", graph)
+	var index = graphs_list.add_item(title, graph)
 	Globals.graphs.insert(index, new_graph)
 	return index
 

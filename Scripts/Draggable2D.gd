@@ -5,7 +5,7 @@ class_name Draggable2D
 
 @export var snap := true
 @export var snap_threshold := 10.0
-@export var snap_position := Vector2.ZERO
+#@export var snap_position := Vector2.ZERO
 
 var hovered := false
 var grabbed := false
@@ -21,7 +21,7 @@ func _ready():
 func _unhandled_input(event):
 	if event.is_action_pressed("Select"):
 		grabbed = hovered && !grabbed
-		selection_updated(true)
+		selection_updated(hovered)
 	if event.is_action_released("Select"):
 		grabbed = false
 	if event is InputEventMouseMotion:
@@ -35,7 +35,8 @@ func _unhandled_input(event):
 
 func follow_mouse():
 	var target_position = get_global_mouse_position() + mouse_offset
-	target_position = Globals.snap(snap_position, target_position, snap_threshold) if snap else target_position
+	if snap:
+		target_position = Globals.snap(target_position, snap_threshold)
 	
 	move(target_position)
 
