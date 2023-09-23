@@ -6,18 +6,28 @@ extends Node2D
 @onready var graph_visualizer = %GraphVisualizer
 @onready var save_manager = SaveManager.new()
 
-@export var graphItemScene : PackedScene
+@export var graph_item_scene : PackedScene
+@export var open_dialog : NativeFileDialog
+@export var save_dialog : NativeFileDialog
 
 
-#func _input(event):
-#	if event is InputEventKey:
-#		if event.is_action_pressed("ui_accept"):
-#			save_manager.save_graph(Globals.graphs[Globals.selected_graph])
+func _input(event):
+	if event is InputEventKey:
+		if event.is_action_pressed("ui_accept"):
+			save_dialog.show()
+		if event.is_action_pressed("ui_cancel"):
+			open_dialog.show()
+			#save_manager.save_graph(Globals.graphs[Globals.selected_graph], file_dialog.)
 
 
 func _process(delta):
-	if Globals.selected_item:
+	if is_instance_valid(Globals.selected_item):
 		$UI/LineEdit.text = str(Globals.selected_item.global_position)
+
+
+func save_graph(location : String) -> void:
+	print(location)
+	save_manager.save_graph(Globals.graphs[Globals.selected_graph], location)
 
 
 func load_graph(graph_path : String, graph_object : GraphResource = GraphResource.new()):
@@ -33,7 +43,7 @@ func load_graph(graph_path : String, graph_object : GraphResource = GraphResourc
 
 func add_graph(title := "New graph") -> int:
 #	Adds our new graph to the list and to our global graphs dictionary and initializing the points list
-	var graph = graphItemScene.instantiate()
+	var graph = graph_item_scene.instantiate()
 	# A bit unecessary... TODO if changing back to grabbing by name or giving it as an exported variable
 	Globals.get_first_in_group(graph, "Item").item_selected.connect(item_selected)
 	var new_graph = Graph.new()

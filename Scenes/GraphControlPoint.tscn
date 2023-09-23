@@ -18,12 +18,12 @@ shape = SubResource("CircleShape2D_lwskf")
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("2_uscam")
 
-[node name="Handle1" parent="." node_paths=PackedStringArray("oppisite_handle") instance=ExtResource("2_ryi8i")]
-oppisite_handle = NodePath("../Handle2")
+[node name="Handle1" parent="." node_paths=PackedStringArray("opposite_handle") instance=ExtResource("2_ryi8i")]
+opposite_handle = NodePath("../Handle2")
 start_offset = Vector2(-30, 0)
 
-[node name="Handle2" parent="." node_paths=PackedStringArray("oppisite_handle") instance=ExtResource("2_ryi8i")]
-oppisite_handle = NodePath("../Handle1")
+[node name="Handle2" parent="." node_paths=PackedStringArray("opposite_handle") instance=ExtResource("2_ryi8i")]
+opposite_handle = NodePath("../Handle1")
 metadata/_edit_use_anchors_ = true
 
 [connection signal="moved" from="Handle1" to="." method="handle_moved"]

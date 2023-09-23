@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://snu6npgdhy3"]
+
+[ext_resource type="Script" path="res://Scripts/GraphsPreview.gd" id="1_xsomw"]
+[ext_resource type="PackedScene" uid="uid://c8p0rq85bfrc3" path="res://Scenes/PremadeGraphs/Supply.tscn" id="2_putij"]
+
+[node name="GraphsPreview" type="GridContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+script = ExtResource("1_xsomw")
+premade_graphs = Array[PackedScene]([ExtResource("2_putij")])
+item_group = "Item"

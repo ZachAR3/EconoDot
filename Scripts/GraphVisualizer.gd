@@ -50,22 +50,14 @@ func _draw():
 
 func update_curve():
 	# TODO
+	print("update")
 	for graph in Globals.graphs:
 		graph.curve.clear_points()
 		for point in graph.points:
-			var handle_1
-			var handle_2
+			var handle_1 = int(point.handles_enabled) * point.handles[0].position
+			var handle_2 = int(point.handles_enabled) * point.handles[1].position
 			
-			if point.handles[0].position == point.handles[0].start_offset:
-				handle_1 = Vector2.ZERO
-			else:
-				handle_1 = point.handles[0].position
-			if point.handles[1].position == point.handles[1].start_offset:
-				handle_2 = Vector2.ZERO
-			else:
-				handle_2 = point.handles[1].position
-				
-			graph.curve.add_point(point.global_position, handle_1, handle_2)
+			graph.curve.add_point(point.global_position, handle_1, handle_2, point.handles_enabled)
 	queue_redraw()
 
 

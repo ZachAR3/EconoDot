@@ -1,7 +1,8 @@
 extends Draggable2D
 
-@export var oppisite_handle : Area2D
+@export var opposite_handle : Area2D
 @export var start_offset := Vector2(30, 0)
+@export var enabled := false
 
 
 func _ready():
@@ -11,19 +12,25 @@ func _ready():
 
 func _unhandled_input(event):
 	super(event)
+	if hovered && event.is_action_pressed("Delete"):
+		#print(Globals.graphs[Globals.selected_graph].resources)
+		enabled = false
+#		opposite_handle.enabled = false
+		moved.emit()
 
 
 func move(new_position : Vector2):
+	enabled = true
 	global_position = new_position
-	oppisite_handle.position = -position
+	opposite_handle.position = -position
 	
 	moved.emit()
 	
-	oppisite_handle.queue_redraw()
+	opposite_handle.queue_redraw()
 	queue_redraw()
 
 
 func _draw():
-	draw_line(Vector2.ZERO, oppisite_handle.position, Globals.trimary, 1, true)
+	draw_line(Vector2.ZERO, opposite_handle.position, Globals.trimary, 1, true)
 
 

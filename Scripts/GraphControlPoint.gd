@@ -3,6 +3,8 @@ extends Draggable2D
 
 @export var handles : Array[Area2D]
 
+var handles_enabled = false
+
 signal delete_control(control)
 
 
@@ -32,6 +34,7 @@ func toggle_handles(enabled : bool):
 
 
 func handle_moved():
+	handles_enabled = handles.any(func(handle) : return handle.enabled)
 	moved.emit()
 
 

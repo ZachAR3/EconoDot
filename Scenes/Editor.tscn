@@ -1,19 +1,20 @@
-[gd_scene load_steps=11 format=3 uid="uid://bpbsx078wocty"]
+[gd_scene load_steps=10 format=3 uid="uid://bpbsx078wocty"]
 
 [ext_resource type="Script" path="res://Scripts/Editor.gd" id="1_32imw"]
 [ext_resource type="Script" path="res://Scripts/GraphVisualizer.gd" id="1_lv1lg"]
 [ext_resource type="PackedScene" uid="uid://bsxbb0ccvpx8u" path="res://Scenes/GraphControlPoint.tscn" id="2_8a8t4"]
-[ext_resource type="PackedScene" uid="uid://2m5l61gf471j" path="res://Scenes/ItemLineEdit.tscn" id="2_752ye"]
+[ext_resource type="PackedScene" uid="uid://2m5l61gf471j" path="res://Scenes/GraphItem.tscn" id="2_k3sde"]
 [ext_resource type="Script" path="res://Scripts/ViewController.gd" id="3_1qmvv"]
 [ext_resource type="PackedScene" uid="uid://bls1xbvvuh4cn" path="res://Scenes/Axis.tscn" id="3_2nxg0"]
 [ext_resource type="Script" path="res://Scripts/Grid.gd" id="4_j68ae"]
 [ext_resource type="Script" path="res://Scripts/ItemListBase.gd" id="7_gfjl3"]
-[ext_resource type="Script" path="res://Scripts/GraphsPreview.gd" id="8_eqy0j"]
-[ext_resource type="PackedScene" uid="uid://c8p0rq85bfrc3" path="res://Scenes/PremadeGraphs/Supply.tscn" id="9_rdehx"]
+[ext_resource type="PackedScene" uid="uid://snu6npgdhy3" path="res://Scenes/GraphsPreview.tscn" id="9_7eiox"]
 
-[node name="Editor" type="Node2D"]
+[node name="Editor" type="Node2D" node_paths=PackedStringArray("open_dialog", "save_dialog")]
 script = ExtResource("1_32imw")
-graphItemScene = ExtResource("2_752ye")
+graph_item_scene = ExtResource("2_k3sde")
+open_dialog = NodePath("OpenDialog")
+save_dialog = NodePath("SaveDialog")
 
 [node name="Axis" parent="." instance=ExtResource("3_2nxg0")]
 
@@ -92,16 +93,18 @@ item_group = "Item"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="GraphsPreview" type="GridContainer" parent="UI/PanelContainer/SideBar/GraphItems/GraphsPreviewContainer" node_paths=PackedStringArray("editor")]
+[node name="GraphsPreview" parent="UI/PanelContainer/SideBar/GraphItems/GraphsPreviewContainer" instance=ExtResource("9_7eiox")]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-columns = 2
-script = ExtResource("8_eqy0j")
-editor = NodePath("../../../../../..")
-premade_graphs = Array[PackedScene]([ExtResource("9_rdehx")])
-item_group = "Item"
+
+[node name="OpenDialog" type="NativeFileDialog" parent="."]
+title = "Open a graph"
+file_mode = 0
+
+[node name="SaveDialog" type="NativeFileDialog" parent="."]
+title = "Save a graph"
 
 [connection signal="pressed" from="UI/PanelContainer/SideBar/Header/AddGraph" to="." method="add_graph"]
 [connection signal="pressed" from="UI/PanelContainer/SideBar/Header/RemoveGraph" to="." method="remove_graph"]
+[connection signal="file_selected" from="OpenDialog" to="." method="load_graph"]
+[connection signal="file_selected" from="SaveDialog" to="." method="save_graph"]
