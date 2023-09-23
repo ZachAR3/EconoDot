@@ -24,7 +24,7 @@ func move(new_position : Vector2):
 
 func selection_updated(currently_selected : bool):
 	if currently_selected:
-		Globals.selected_item = self
+		#Globals.selected_item = self
 		toggle_handles(true)
 
 

@@ -26,7 +26,6 @@ func _process(delta):
 
 
 func save_graph(location : String) -> void:
-	print(location)
 	save_manager.save_graph(Globals.graphs[Globals.selected_graph], location)
 
 
@@ -39,6 +38,8 @@ func load_graph(graph_path : String, graph_object : GraphResource = GraphResourc
 		var new_point = graph_visualizer.add_point(point)
 		new_point.handles[0].global_position = loaded_graph_resources.points[point][0]
 		new_point.handles[1].global_position = loaded_graph_resources.points[point][1]
+		new_point.handles_enabled = loaded_graph_resources.points[point][2]
+		graph_visualizer.update_curve()
 
 
 func add_graph(title := "New graph") -> int:
