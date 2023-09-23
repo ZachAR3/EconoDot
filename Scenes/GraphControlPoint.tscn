@@ -7,6 +7,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_lwskf"]
 
 [node name="ControlPoint" type="Area2D" node_paths=PackedStringArray("handles")]
+monitorable = false
 script = ExtResource("2_a5dw6")
 handles = [NodePath("Handle1"), NodePath("Handle2")]
 
@@ -24,3 +25,6 @@ start_offset = Vector2(-30, 0)
 [node name="Handle2" parent="." node_paths=PackedStringArray("oppisite_handle") instance=ExtResource("2_ryi8i")]
 oppisite_handle = NodePath("../Handle1")
 metadata/_edit_use_anchors_ = true
+
+[connection signal="moved" from="Handle1" to="." method="handle_moved"]
+[connection signal="moved" from="Handle2" to="." method="handle_moved"]

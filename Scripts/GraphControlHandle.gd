@@ -16,6 +16,9 @@ func _unhandled_input(event):
 func move(new_position : Vector2):
 	global_position = new_position
 	oppisite_handle.position = -position
+	
+	moved.emit()
+	
 	oppisite_handle.queue_redraw()
 	queue_redraw()
 

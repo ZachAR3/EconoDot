@@ -12,6 +12,8 @@ var grabbed := false
 		
 var mouse_offset : Vector2
 
+signal moved
+
 
 func _ready():
 	mouse_entered.connect(_mouse_entered)
@@ -27,7 +29,6 @@ func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		if grabbed:
 			follow_mouse()
-			queue_redraw()
 		else:
 			var mouse_pos = get_global_mouse_position()
 			mouse_offset = Vector2(global_position.x - mouse_pos.x, global_position.y - mouse_pos.y)

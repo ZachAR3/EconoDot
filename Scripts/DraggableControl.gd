@@ -36,7 +36,7 @@ func _gui_input(event):
 
 func follow_mouse():
 	var target_position = mouse_position + mouse_offset
-	target_position = Globals.snap(snap_position, target_position, snap_threshold) if snap else target_position
+	target_position = Globals.snap(target_position, snap_threshold) if snap else target_position
 	
 	move(target_position)
 

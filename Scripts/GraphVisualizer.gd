@@ -18,7 +18,7 @@ func _process(_delta):
 	match mode:
 		MOVE:
 			move()
-	update_curve()
+	#update_curve()
 
 
 func _unhandled_input(event):
@@ -76,8 +76,6 @@ func add_point(point_position := Vector2.INF):
 	var point = control_point_scene.instantiate()
 	var point_index = -1
 	var closest_point
-#	if !Globals.graphs.has(Globals.selected_graph):
-#		Globals.graphs[Globals.selected_graph] = []
 		
 	Globals.graphs[Globals.selected_graph].add_child(point)
 	point.delete_control.connect(remove_point)
@@ -85,6 +83,8 @@ func add_point(point_position := Vector2.INF):
 		point.global_position = get_global_mouse_position()
 	else:
 		point.global_position = point_position
+	
+	point.moved.connect(update_curve)
 	
 	Globals.graphs[Globals.selected_graph].points.append(point)
 	update_curve()
