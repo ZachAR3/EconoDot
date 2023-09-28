@@ -12,6 +12,7 @@ signal add_graph (GraphResource)
 func _ready():
 	preview_maker.graph = graph
 	preview_maker.get_preview()
+	
 
 
 func _add_graph(graph_index : int):
