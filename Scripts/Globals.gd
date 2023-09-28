@@ -1,8 +1,8 @@
 extends Node
 
 
-var graphs = []
-var selected_graph = -1
+var graphs := []
+var selected_graph := -1
 var selected_item
 # = [[axis or pos, position (Vector2)]
 var snappable_axis : Array[AxisResource] = []

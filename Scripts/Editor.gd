@@ -11,13 +11,13 @@ extends Node2D
 @export var save_dialog : NativeFileDialog
 
 
-func _input(event):
-	if event is InputEventKey:
-		if event.is_action_pressed("ui_accept"):
-			save_dialog.show()
-		if event.is_action_pressed("ui_cancel"):
-			open_dialog.show()
-			#save_manager.save_graph(Globals.graphs[Globals.selected_graph], file_dialog.)
+#func _input(event):
+#	if event is InputEventKey:
+#		if event.is_action_pressed("ui_accept"):
+#			save_dialog.show()
+#		if event.is_action_pressed("ui_cancel"):
+#			open_dialog.show()
+#			#save_manager.save_graph(Globals.graphs[Globals.selected_graph], file_dialog.)
 
 
 func _process(delta):
@@ -73,3 +73,12 @@ func remove_graph():
 
 func item_selected(index):
 	Globals.selected_graph = index
+
+
+func _load_graph_pressed():
+	open_dialog.show()
+
+
+func _save_graph_pressed():
+	if Globals.selected_graph != -1:
+		save_dialog.show()

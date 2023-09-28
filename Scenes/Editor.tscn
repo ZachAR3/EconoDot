@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bpbsx078wocty"]
+[gd_scene load_steps=11 format=3 uid="uid://bpbsx078wocty"]
 
 [ext_resource type="Script" path="res://Scripts/Editor.gd" id="1_32imw"]
 [ext_resource type="Script" path="res://Scripts/GraphVisualizer.gd" id="1_lv1lg"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/Grid.gd" id="4_j68ae"]
 [ext_resource type="Script" path="res://Scripts/ItemListBase.gd" id="7_gfjl3"]
 [ext_resource type="PackedScene" uid="uid://snu6npgdhy3" path="res://Scenes/GraphsPreview.tscn" id="9_7eiox"]
+[ext_resource type="PackedScene" uid="uid://kctlpbwxtd68" path="res://Scenes/GraphPreviewItem.tscn" id="10_y2pkd"]
 
 [node name="Editor" type="Node2D" node_paths=PackedStringArray("open_dialog", "save_dialog")]
 script = ExtResource("1_32imw")
@@ -35,22 +36,42 @@ control_point_scene = ExtResource("2_8a8t4")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="ToolBar" type="PanelContainer" parent="UI"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.05
+grow_horizontal = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Tools" type="HBoxContainer" parent="UI/ToolBar"]
+layout_mode = 2
+alignment = 1
+
+[node name="LoadGraph" type="Button" parent="UI/ToolBar/Tools"]
+layout_mode = 2
+text = "Open graph"
+
+[node name="SaveGraph" type="Button" parent="UI/ToolBar/Tools"]
+layout_mode = 2
+text = "SaveGraph
+"
+
 [node name="LineEdit" type="LineEdit" parent="UI"]
 anchors_preset = -1
-anchor_left = 0.8
+anchor_left = 0.9
+anchor_top = 0.05
 anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 0
+anchor_bottom = 1.00154
 size_flags_horizontal = 8
 metadata/_edit_use_anchors_ = true
 
 [node name="PanelContainer" type="PanelContainer" parent="UI"]
 anchors_preset = -1
+anchor_top = 0.05
 anchor_right = 0.2
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="SideBar" type="VBoxContainer" parent="UI/PanelContainer"]
 layout_mode = 2
@@ -93,17 +114,24 @@ item_group = "Item"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="GraphsPreview" parent="UI/PanelContainer/SideBar/GraphItems/GraphsPreviewContainer" instance=ExtResource("9_7eiox")]
+[node name="GraphsPreview" parent="UI/PanelContainer/SideBar/GraphItems/GraphsPreviewContainer" node_paths=PackedStringArray("editor") instance=ExtResource("9_7eiox")]
 unique_name_in_owner = true
 layout_mode = 2
+editor = NodePath("../../../../../..")
+premade_graphs = "res://Graphs"
+graph_preview_scene = ExtResource("10_y2pkd")
 
 [node name="OpenDialog" type="NativeFileDialog" parent="."]
-title = "Open a graph"
+title = "Open a File"
 file_mode = 0
+filters = PackedStringArray("*.ed *.res *.tres ; Supported graphs", "* ; All")
 
 [node name="SaveDialog" type="NativeFileDialog" parent="."]
 title = "Save a graph"
+filters = PackedStringArray("*.ed *.res *.tres ; Supported graphs", "* ; All")
 
+[connection signal="pressed" from="UI/ToolBar/Tools/LoadGraph" to="." method="_load_graph_pressed"]
+[connection signal="pressed" from="UI/ToolBar/Tools/SaveGraph" to="." method="_save_graph_pressed"]
 [connection signal="pressed" from="UI/PanelContainer/SideBar/Header/AddGraph" to="." method="add_graph"]
 [connection signal="pressed" from="UI/PanelContainer/SideBar/Header/RemoveGraph" to="." method="remove_graph"]
 [connection signal="file_selected" from="OpenDialog" to="." method="load_graph"]

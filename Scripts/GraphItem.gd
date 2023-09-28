@@ -8,7 +8,6 @@ func _double_clicked(index : int):
 	var rect_size = get_rect().size
 	rect_size.y =  properties_position.y #+ DisplayServer.window_get_size(0).y
 	properties_position.y += rect_size.y
-	$PopupMenu.popup(Rect2i(properties_position , rect_size))
 
 
 

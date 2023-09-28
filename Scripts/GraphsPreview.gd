@@ -2,15 +2,17 @@ extends ItemListBase
 
 
 @export var editor : Node2D
-@export var premade_graphs : Array[PackedScene]
-#@export var graph_preview_scene : PackedScene
+@export_dir var premade_graphs : String
+@export var graph_preview_scene : PackedScene
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for premade_graph in premade_graphs:
-		var graph = premade_graph.instantiate()#
-		#graph_preview.graph = premade_graph
+	var graphs_directory = DirAccess.open(premade_graphs)
+	# TODO #17 (Fix crappy path grabbing)
+	for graph_file in graphs_directory.get_files():
+		var graph = graph_preview_scene.instantiate()
+		graph.graph = FileManager.load_data(graphs_directory.get_current_dir() + "/" + graph_file)
 		add_item("New graph", graph)
 
 

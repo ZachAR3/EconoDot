@@ -1,11 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://kctlpbwxtd68"]
 
 [ext_resource type="Script" path="res://Scripts/ItemClass.gd" id="1_ad807"]
-[ext_resource type="Texture2D" uid="uid://cg4v2e5hsuxfp" path="res://icon.svg" id="1_y0t7h"]
 [ext_resource type="Script" path="res://Scripts/GraphPreviewItem.gd" id="2_jbfbq"]
+[ext_resource type="Script" path="res://Scripts/PreviewMaker.gd" id="4_s5rci"]
 
-[node name="GraphPreview" type="TextureRect"]
+[node name="GraphPreview" type="Control" node_paths=PackedStringArray("preview_maker")]
 unique_name_in_owner = true
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -13,12 +14,12 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource("1_y0t7h")
-expand_mode = 1
-stretch_mode = 4
+mouse_filter = 2
 script = ExtResource("2_jbfbq")
+graph_path = "res://graph.ed"
+preview_maker = NodePath("PreviewContainer/PreviewViewport/Preview")
 
-[node name="PreviewItem" type="Control" parent="." groups=["Item"]]
+[node name="Item" type="Control" parent="." groups=["Item"]]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,6 +28,49 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_force_pass_scroll_events = false
 script = ExtResource("1_ad807")
 
-[connection signal="double_clicked" from="PreviewItem" to="." method="_add_graph"]
+[node name="PreviewContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch = true
+
+[node name="PreviewViewport" type="SubViewport" parent="PreviewContainer"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="Preview" type="Control" parent="PreviewContainer/PreviewViewport" node_paths=PackedStringArray("preview", "preview_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+script = ExtResource("4_s5rci")
+preview = NodePath("../../..")
+preview_container = NodePath("../..")
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="PreviewContainer/PreviewViewport"]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[connection signal="double_clicked" from="Item" to="." method="_add_graph"]
