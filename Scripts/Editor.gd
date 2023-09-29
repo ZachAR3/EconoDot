@@ -7,6 +7,7 @@ extends Node2D
 @onready var save_manager = SaveManager.new()
 
 @export var graph_item_scene : PackedScene
+@export var label_scene : PackedScene
 @export var open_dialog : NativeFileDialog
 @export var save_dialog : NativeFileDialog
 
@@ -26,10 +27,7 @@ func export_graph():
 		export_popup.visible = false
 		await get_tree().process_frame
 		await get_tree().process_frame
-		#get_viewport().get_preview(Vector2(500, 500))
 		var viewport_transform = get_viewport_transform().origin
-		print(size.x)
-		#get_viewport().get_texture().get_image().get_region(Rect2i(start_pos.x + viewport_transform.x, start_pos.y + viewport_transform.y, viewport_transform.x + end_pos.x, DisplayServer.window_get_size().y -(viewport_transform.y + end_pos.y))).save_png("res://test.png")
 		get_viewport().get_texture().get_image().get_region(Rect2i(viewport_transform.x + start_pos.x, viewport_transform.y - start_pos.y, size.x, size.y)).save_png("res://test.png")
 		%UI.visible = true
 
@@ -95,3 +93,13 @@ func _save_graph_pressed():
 
 func export_pressed():
 	export_popup.popup_centered()
+
+
+func add_label():
+	var label = label_scene.instantiate()
+	graph_visualizer.add_child(label)
+
+
+func remove_label():
+	if is_instance_valid(Globals.selected_item) && Globals.selected_item is DraggableControl:
+		Globals.selected_item.queue_free()

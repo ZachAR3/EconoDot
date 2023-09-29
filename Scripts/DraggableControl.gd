@@ -5,7 +5,7 @@ class_name DraggableControl
 
 @export var snap := true
 @export var snap_threshold := 10.0
-@export var snap_position := Vector2.ZERO
+@export var snap_offset := Vector2.ZERO
 
 var hovered := false
 var grabbed := false
@@ -36,20 +36,20 @@ func _gui_input(event):
 
 func follow_mouse():
 	var target_position = mouse_position + mouse_offset
-	target_position = Globals.snap(target_position, snap_threshold) if snap else target_position
+	target_position = Globals.snap(target_position + snap_offset, snap_threshold) if snap else target_position
 	
 	move(target_position)
 
 
 func move(new_position : Vector2):
 	# Meant to be overrode with movement code
-	pass
+	global_position = new_position - snap_offset
 
 
 # Added for functions which need to know when grabbed is updated
 func selection_updated(selected : bool):
 #	Serves as an override to be used off of
-	pass
+	Globals.selected_item = self
 
 
 func _mouse_entered():

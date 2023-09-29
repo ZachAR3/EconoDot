@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bpbsx078wocty"]
+[gd_scene load_steps=13 format=3 uid="uid://bpbsx078wocty"]
 
 [ext_resource type="Script" path="res://Scripts/Editor.gd" id="1_32imw"]
 [ext_resource type="Script" path="res://Scripts/GraphVisualizer.gd" id="1_lv1lg"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/ViewController.gd" id="3_1qmvv"]
 [ext_resource type="PackedScene" uid="uid://bls1xbvvuh4cn" path="res://Scenes/Axis.tscn" id="3_2nxg0"]
 [ext_resource type="Script" path="res://Scripts/Grid.gd" id="4_j68ae"]
+[ext_resource type="PackedScene" uid="uid://qyi56tyepaot" path="res://Scenes/DraggableLabel.tscn" id="5_yfy7i"]
 [ext_resource type="Script" path="res://Scripts/ItemListBase.gd" id="7_gfjl3"]
 [ext_resource type="PackedScene" uid="uid://kwo42inropgq" path="res://Scenes/ResizeableBar.tscn" id="8_hyj0c"]
 [ext_resource type="PackedScene" uid="uid://snu6npgdhy3" path="res://Scenes/GraphsPreview.tscn" id="9_7eiox"]
@@ -15,6 +16,7 @@
 [node name="Editor" type="Node2D" node_paths=PackedStringArray("open_dialog", "save_dialog", "export_popup", "start_x", "start_y", "width", "height")]
 script = ExtResource("1_32imw")
 graph_item_scene = ExtResource("2_k3sde")
+label_scene = ExtResource("5_yfy7i")
 open_dialog = NodePath("OpenDialog")
 save_dialog = NodePath("SaveDialog")
 export_popup = NodePath("PopupPanel")
@@ -78,6 +80,14 @@ text = "Save Graph
 [node name="ExportGraph" type="Button" parent="UI/ToolBar/Tools"]
 layout_mode = 2
 text = "Export Graph"
+
+[node name="AddLabel" type="Button" parent="UI/ToolBar/Tools"]
+layout_mode = 2
+text = "Add Label"
+
+[node name="RemoveLabel" type="Button" parent="UI/ToolBar/Tools"]
+layout_mode = 2
+text = "Remove Label"
 
 [node name="GraphsPanel" type="PanelContainer" parent="UI"]
 anchors_preset = -1
@@ -152,7 +162,6 @@ anchor = 2
 
 [node name="PopupPanel" type="PopupPanel" parent="."]
 size = Vector2i(400, 400)
-visible = true
 
 [node name="OptionsContainer" type="VBoxContainer" parent="PopupPanel"]
 offset_left = 4.0
@@ -215,6 +224,8 @@ text = "Export"
 [connection signal="pressed" from="UI/ToolBar/Tools/LoadGraph" to="." method="_load_graph_pressed"]
 [connection signal="pressed" from="UI/ToolBar/Tools/SaveGraph" to="." method="_save_graph_pressed"]
 [connection signal="pressed" from="UI/ToolBar/Tools/ExportGraph" to="." method="export_pressed"]
+[connection signal="pressed" from="UI/ToolBar/Tools/AddLabel" to="." method="add_label"]
+[connection signal="pressed" from="UI/ToolBar/Tools/RemoveLabel" to="." method="remove_label"]
 [connection signal="pressed" from="UI/GraphsPanel/SidebarContainer/SideBar/Header/AddGraph" to="." method="add_graph"]
 [connection signal="pressed" from="UI/GraphsPanel/SidebarContainer/SideBar/Header/RemoveGraph" to="." method="remove_graph"]
 [connection signal="pressed" from="PopupPanel/OptionsContainer/Export" to="." method="export_graph"]

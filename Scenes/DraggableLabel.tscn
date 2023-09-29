@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://qyi56tyepaot"]
+
+[ext_resource type="Script" path="res://Scripts/DraggableLabel.gd" id="1_6ww7v"]
+
+[node name="DraggableLabel" type="LineEdit" node_paths=PackedStringArray("line_edit")]
+anchors_preset = -1
+anchor_left = 0.473804
+anchor_top = 0.478472
+anchor_right = 0.526196
+anchor_bottom = 0.521528
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+editable = false
+expand_to_text_length = true
+caret_blink = true
+caret_blink_interval = 0.5
+script = ExtResource("1_6ww7v")
+line_edit = NodePath(".")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="text_submitted" from="." to="." method="selection_updated" unbinds=1]
