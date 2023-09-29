@@ -7,3 +7,4 @@ class_name GraphResource
 @export var color = Globals.secondary
 @export var width := 2
 @export var name := "New graph"
+@export var visible := true

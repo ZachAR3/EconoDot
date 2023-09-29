@@ -54,11 +54,12 @@ func update_curve():
 	# TODO
 	for graph in Globals.graphs:
 		graph.curve.clear_points()
-		for point in graph.points:
-			var handle_1 = int(point.handles_enabled) * point.handles[0].position
-			var handle_2 = int(point.handles_enabled) * point.handles[1].position
-			
-			graph.curve.add_point(point.global_position, handle_1, handle_2)
+		if graph.resources.visible:
+			for point in graph.points:
+				var handle_1 = int(point.handles_enabled) * point.handles[0].position
+				var handle_2 = int(point.handles_enabled) * point.handles[1].position
+				
+				graph.curve.add_point(point.global_position, handle_1, handle_2)
 	curve_updated.emit()
 	queue_redraw()
 

@@ -1,23 +1,38 @@
 extends PanelContainer
 
 @export_group("Graph")
+@export var graph_container : VBoxContainer
 @export var x_coords : SpinBox
 @export var y_coords : SpinBox
+@export var control_points_visible : CheckButton
 
 @export_group("Grid")
+@export var grid_container : VBoxContainer
 @export var horizontal_gap : SpinBox
 @export var vertical_gap : SpinBox
 
 @export_group("Axis")
+@export var axis_container : VBoxContainer
 @export var horizontal_offset : SpinBox
 @export var vertical_offset : SpinBox
-#@export var x_grid_color : ColorPickerButton
-#@export var y_grid_color : ColorPickerButton
 
 
 func _ready():
 	%GraphVisualizer.curve_updated.connect(curve_updated)
 	grid_gap_updated()
+
+
+# UI Visibility
+func graph_options_visible_toggled():
+	graph_container.visible = !graph_container.visible
+
+
+func grid_options_visible_toggled():
+	grid_container.visible = !grid_container.visible
+
+
+func axis_options_visible_toggled():
+	axis_container.visible = !axis_container.visible
 
 
 # Graph options
@@ -48,6 +63,19 @@ func graph_color_updated(color : Color):
 func graph_thickness_updated(thickness : float):
 	if Globals.selected_graph > -1:
 		Globals.graphs[Globals.selected_graph].resources.width = thickness
+		%GraphVisualizer.update_curve()
+
+
+func show_control_points_toggled(points_visible):
+	if Globals.selected_graph > -1:
+		Globals.graphs[Globals.selected_graph].visible = points_visible
+
+
+func graph_visibility_toggled(graph_visible):
+	control_points_visible.button_pressed = graph_visible
+	control_points_visible.disabled = !graph_visible
+	if Globals.selected_graph > -1:
+		Globals.graphs[Globals.selected_graph].resources.visible = graph_visible
 		%GraphVisualizer.update_curve()
 
 
@@ -113,3 +141,4 @@ func horizontal_axis_enabled(enabled : bool):
 func vertical_axis_enabled(enabled : bool):
 	%Axis.draw_vertical = enabled
 	%Axis.queue_redraw()
+

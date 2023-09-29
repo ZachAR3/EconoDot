@@ -1,0 +1,395 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct0syn32mxtou"]
+
+[ext_resource type="Script" path="res://Scripts/OptionsPanel.gd" id="1_bfy1o"]
+[ext_resource type="PackedScene" uid="uid://kwo42inropgq" path="res://Scenes/ResizeableBar.tscn" id="2_t6xl1"]
+
+[node name="OptionsPanel" type="PanelContainer" node_paths=PackedStringArray("graph_container", "x_coords", "y_coords", "control_points_visible", "grid_container", "horizontal_gap", "vertical_gap", "axis_container", "horizontal_offset", "vertical_offset")]
+anchors_preset = -1
+anchor_left = 0.829687
+anchor_top = 0.05
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_force_pass_scroll_events = false
+script = ExtResource("1_bfy1o")
+graph_container = NodePath("HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions")
+x_coords = NodePath("HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/XCoordsContainer/XCoords")
+y_coords = NodePath("HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/YCoordsContainer/YCoords")
+control_points_visible = NodePath("HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/ControlPointsVisible/ShowControlPoints")
+grid_container = NodePath("HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions")
+horizontal_gap = NodePath("HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/HorizontalGridDistanceContainer/XGridDistance")
+vertical_gap = NodePath("HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/VerticalGridDistanceContainer/YGridDistance")
+axis_container = NodePath("HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions")
+horizontal_offset = NodePath("HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisHorizontalOffsetContainer/AxisHorizontalOffset")
+vertical_offset = NodePath("HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisVerticalOffsetContainer/AxisVerticalOffset")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="ResizeBar" parent="HBoxContainer" node_paths=PackedStringArray("root") instance=ExtResource("2_t6xl1")]
+layout_mode = 2
+root = NodePath("../..")
+max_size = 0.83
+
+[node name="OptionsScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="OptionsContainer" type="VBoxContainer" parent="HBoxContainer/OptionsScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GraphOptionsButton" type="Button" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer"]
+layout_mode = 2
+text = "Graph options"
+
+[node name="GraphOptions" type="VBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="GraphVisible" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions"]
+layout_mode = 2
+
+[node name="GraphVisibleLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/GraphVisible"]
+layout_mode = 2
+text = "Visibility:"
+
+[node name="GraphVisible" type="CheckButton" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/GraphVisible"]
+layout_mode = 2
+size_flags_horizontal = 10
+button_pressed = true
+
+[node name="ControlPointsVisible" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions"]
+layout_mode = 2
+
+[node name="ShowControlPointsLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/ControlPointsVisible"]
+layout_mode = 2
+text = "Show control points"
+
+[node name="ShowControlPoints" type="CheckButton" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/ControlPointsVisible"]
+layout_mode = 2
+size_flags_horizontal = 10
+button_pressed = true
+
+[node name="XCoordsContainer" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions"]
+layout_mode = 2
+
+[node name="XCoordsLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/XCoordsContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "X:"
+
+[node name="XCoords" type="SpinBox" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/XCoordsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+min_value = -10000.0
+max_value = 10000.0
+
+[node name="YCoordsContainer" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions"]
+layout_mode = 2
+
+[node name="YCoordsLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/YCoordsContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Y:"
+
+[node name="YCoords" type="SpinBox" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/YCoordsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+min_value = -10000.0
+max_value = 10000.0
+
+[node name="GraphThickness" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions"]
+layout_mode = 2
+
+[node name="GraphThicknessLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/GraphThickness"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Thickness"
+
+[node name="GraphThickness" type="SpinBox" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/GraphThickness"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+min_value = -1.0
+max_value = 10000.0
+value = 2.0
+
+[node name="ColorContainer" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions"]
+layout_mode = 2
+
+[node name="ColorLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/ColorContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Color:"
+
+[node name="ColorPicker" type="ColorPickerButton" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/ColorContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "-"
+
+[node name="GridOptionsButton" type="Button" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer"]
+layout_mode = 2
+text = "Grid options"
+
+[node name="GridOptions" type="VBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer"]
+visible = false
+layout_mode = 2
+
+[node name="GapSizeLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions"]
+layout_mode = 2
+text = "Gap Size"
+horizontal_alignment = 1
+
+[node name="HorizontalGridDistanceContainer" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions"]
+layout_mode = 2
+
+[node name="XGridDistanceLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/HorizontalGridDistanceContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "X:"
+
+[node name="XGridDistance" type="SpinBox" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/HorizontalGridDistanceContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+min_value = -10000.0
+max_value = 10000.0
+value = 50.0
+
+[node name="VerticalGridDistanceContainer" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions"]
+layout_mode = 2
+
+[node name="YGridDistanceLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/VerticalGridDistanceContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Y:"
+
+[node name="YGridDistance" type="SpinBox" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/VerticalGridDistanceContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+min_value = -10000.0
+max_value = 10000.0
+value = 50.0
+
+[node name="GridThickness" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions"]
+layout_mode = 2
+
+[node name="GridThicknessLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/GridThickness"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Thickness"
+
+[node name="GridThickness" type="SpinBox" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/GridThickness"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+min_value = -1.0
+max_value = 10000.0
+value = 2.0
+
+[node name="HorizontalGridColorContainer" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions"]
+layout_mode = 2
+
+[node name="ColorLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/HorizontalGridColorContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "X Color:"
+
+[node name="ColorPicker" type="ColorPickerButton" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/HorizontalGridColorContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "-"
+
+[node name="VerticalGridColorContainer" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions"]
+layout_mode = 2
+
+[node name="ColorLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/VerticalGridColorContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Y Color:"
+
+[node name="ColorPicker" type="ColorPickerButton" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/VerticalGridColorContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "-"
+
+[node name="GridHorizontalEnabled" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions"]
+layout_mode = 2
+
+[node name="EnabledLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/GridHorizontalEnabled"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "X Enabled"
+
+[node name="EnabledButton" type="CheckButton" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/GridHorizontalEnabled"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+button_pressed = true
+
+[node name="GridVerticalEnabled" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions"]
+layout_mode = 2
+
+[node name="EnabledLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/GridVerticalEnabled"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Y Enabled"
+
+[node name="EnabledButton" type="CheckButton" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/GridVerticalEnabled"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+button_pressed = true
+
+[node name="AxisOptionsButton" type="Button" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer"]
+layout_mode = 2
+text = "Axis options"
+
+[node name="AxisOptions" type="VBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer"]
+visible = false
+layout_mode = 2
+
+[node name="OffsetLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions"]
+layout_mode = 2
+text = "Offset:"
+horizontal_alignment = 1
+
+[node name="AxisHorizontalOffsetContainer" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions"]
+layout_mode = 2
+
+[node name="AxisHorizontalOffsetLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisHorizontalOffsetContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "X:"
+
+[node name="AxisHorizontalOffset" type="SpinBox" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisHorizontalOffsetContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+min_value = -10000.0
+max_value = 10000.0
+
+[node name="AxisVerticalOffsetContainer" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions"]
+layout_mode = 2
+
+[node name="AxisVerticalOffsetLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisVerticalOffsetContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Y:"
+
+[node name="AxisVerticalOffset" type="SpinBox" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisVerticalOffsetContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+min_value = -10000.0
+max_value = 10000.0
+
+[node name="AxisThicknessContainer" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions"]
+layout_mode = 2
+
+[node name="AxisThicknessLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisThicknessContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Thickness"
+
+[node name="AxisThickness" type="SpinBox" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisThicknessContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+min_value = -1.0
+max_value = 10000.0
+value = 2.0
+
+[node name="AxisHorizontalGridColorContainer" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions"]
+layout_mode = 2
+
+[node name="ColorLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisHorizontalGridColorContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "X Color:"
+
+[node name="ColorPicker" type="ColorPickerButton" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisHorizontalGridColorContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "-"
+
+[node name="AxisVerticalGridColorContainer" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions"]
+layout_mode = 2
+
+[node name="ColorLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisVerticalGridColorContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Y Color:"
+
+[node name="ColorPicker" type="ColorPickerButton" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisVerticalGridColorContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "-"
+
+[node name="AxisHorizontalEnabled" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions"]
+layout_mode = 2
+
+[node name="EnabledLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisHorizontalEnabled"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "X Enabled"
+
+[node name="EnabledButton" type="CheckButton" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisHorizontalEnabled"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+button_pressed = true
+
+[node name="AxisVerticalEnabled" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions"]
+layout_mode = 2
+
+[node name="EnabledLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisVerticalEnabled"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Y Enabled"
+
+[node name="EnabledButton" type="CheckButton" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisVerticalEnabled"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+button_pressed = true
+
+[connection signal="pressed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptionsButton" to="." method="graph_options_visible_toggled"]
+[connection signal="toggled" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/GraphVisible/GraphVisible" to="." method="graph_visibility_toggled"]
+[connection signal="toggled" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/ControlPointsVisible/ShowControlPoints" to="." method="show_control_points_toggled"]
+[connection signal="value_changed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/XCoordsContainer/XCoords" to="." method="coordinates_updated" unbinds=1]
+[connection signal="value_changed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/YCoordsContainer/YCoords" to="." method="coordinates_updated" unbinds=1]
+[connection signal="value_changed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/GraphThickness/GraphThickness" to="." method="graph_thickness_updated"]
+[connection signal="color_changed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/ColorContainer/ColorPicker" to="." method="graph_color_updated"]
+[connection signal="pressed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptionsButton" to="." method="grid_options_visible_toggled"]
+[connection signal="value_changed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/HorizontalGridDistanceContainer/XGridDistance" to="." method="grid_gap_updated" unbinds=1]
+[connection signal="value_changed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/VerticalGridDistanceContainer/YGridDistance" to="." method="grid_gap_updated" unbinds=1]
+[connection signal="value_changed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/GridThickness/GridThickness" to="." method="grid_thickness_updated"]
+[connection signal="color_changed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/HorizontalGridColorContainer/ColorPicker" to="." method="horizontal_grid_color_updated"]
+[connection signal="color_changed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/VerticalGridColorContainer/ColorPicker" to="." method="vertical_grid_color_updated"]
+[connection signal="toggled" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/GridHorizontalEnabled/EnabledButton" to="." method="horizontal_grid_enabled"]
+[connection signal="toggled" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/GridVerticalEnabled/EnabledButton" to="." method="vertical_grid_enabled"]
+[connection signal="pressed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptionsButton" to="." method="axis_options_visible_toggled"]
+[connection signal="value_changed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisHorizontalOffsetContainer/AxisHorizontalOffset" to="." method="axis_gap_updated" unbinds=1]
+[connection signal="value_changed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisVerticalOffsetContainer/AxisVerticalOffset" to="." method="axis_gap_updated" unbinds=1]
+[connection signal="value_changed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisThicknessContainer/AxisThickness" to="." method="axis_thickness_updated"]
+[connection signal="color_changed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisHorizontalGridColorContainer/ColorPicker" to="." method="horizontal_axis_color_updated"]
+[connection signal="color_changed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisVerticalGridColorContainer/ColorPicker" to="." method="vertical_axis_color_updated"]
+[connection signal="toggled" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisHorizontalEnabled/EnabledButton" to="." method="horizontal_axis_enabled"]
+[connection signal="toggled" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisVerticalEnabled/EnabledButton" to="." method="vertical_axis_enabled"]

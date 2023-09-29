@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://kwo42inropgq"]
+
+[ext_resource type="Texture2D" uid="uid://wt6echmc3dqq" path="res://Textures/DraggerBar.svg" id="1_kqj15"]
+[ext_resource type="Script" path="res://Scripts/ResizableBar.gd" id="2_02yp6"]
+
+[node name="ResizeBar" type="TextureButton"]
+custom_minimum_size = Vector2(5, 0)
+size_flags_horizontal = 0
+mouse_default_cursor_shape = 10
+texture_normal = ExtResource("1_kqj15")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("2_02yp6")
+max_size = 0.85

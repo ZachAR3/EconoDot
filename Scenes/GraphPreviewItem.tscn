@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/GraphPreviewItem.gd" id="2_jbfbq"]
 [ext_resource type="Script" path="res://Scripts/PreviewMaker.gd" id="4_s5rci"]
 
-[node name="GraphPreview" type="Control" node_paths=PackedStringArray("preview_maker")]
+[node name="GraphPreview" type="Control" node_paths=PackedStringArray("preview_maker", "graph_name")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 3
@@ -14,10 +14,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("2_jbfbq")
 graph_path = "res://graph.ed"
 preview_maker = NodePath("PreviewContainer/PreviewViewport/Preview")
+graph_name = NodePath("PreviewContainer/PreviewViewport/Name")
 
 [node name="Item" type="Control" parent="." groups=["Item"]]
 layout_mode = 2
@@ -62,6 +64,19 @@ script = ExtResource("4_s5rci")
 preview = NodePath("../../..")
 preview_container = NodePath("../..")
 metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="PreviewContainer/PreviewViewport"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+horizontal_alignment = 1
 
 [node name="Panel" type="Panel" parent="PreviewContainer/PreviewViewport"]
 z_index = -1

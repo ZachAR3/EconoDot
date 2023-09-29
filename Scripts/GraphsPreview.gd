@@ -13,7 +13,7 @@ func _ready():
 	for graph_file in graphs_directory.get_files():
 		var graph = graph_preview_scene.instantiate()
 		graph.graph = FileManager.load_data(graphs_directory.get_current_dir() + "/" + graph_file)
-		add_item("New graph", graph)
+		add_item(graph.graph.name, graph)
 
 
 func _double_clicked(index : int):

@@ -5,6 +5,7 @@ var points
 var remapped_points
 var graph
 var drawing_size
+var redraw = false
 
 @export var preview : Control
 @export var preview_container : SubViewportContainer
@@ -43,6 +44,9 @@ func get_drawing_size():
 
 
 func remap_points():
+	preview.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	preview.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	await get_tree().process_frame
 #	Calculate the aspect ratios and scaling required
 	var source_size := Vector2(float(abs(drawing_size[0]) + abs(drawing_size[1])), float(abs(drawing_size[2]) + abs(drawing_size[3])))
 	var source_aspect_ratio = source_size.x/source_size.y
@@ -62,10 +66,18 @@ func remap_points():
 	for point in range(len(remapped_points)):
 		remapped_points[point].x = remap(remapped_points[point].x, drawing_size[1], drawing_size[0], padding, new_scale.x - padding)
 		remapped_points[point].y = remap(remapped_points[point].y, drawing_size[3], drawing_size[2], padding, new_scale.y - padding)
+	
+	preview.size_flags_vertical = Control.SIZE_FILL
+	redraw = true
+	queue_redraw()
 
 
+#TODO #21 should be fixed
 func _draw():
 	if points:
-		remap_points()
-		draw_polyline(remapped_points, graph.color, graph.width, true)
+		if redraw:
+			draw_polyline(remapped_points, graph.color, graph.width, true)
+			redraw = false
+		else:
+			remap_points()
 

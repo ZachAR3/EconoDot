@@ -2,7 +2,7 @@ extends Node2D
 
 class_name Axis
 
-@onready var camera = get_viewport().get_camera_2d()
+@onready var camera := get_viewport().get_camera_2d()
 
 @export var draw_vertical := true
 @export var draw_horizontal := true

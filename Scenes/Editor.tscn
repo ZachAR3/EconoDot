@@ -8,15 +8,26 @@
 [ext_resource type="PackedScene" uid="uid://bls1xbvvuh4cn" path="res://Scenes/Axis.tscn" id="3_2nxg0"]
 [ext_resource type="Script" path="res://Scripts/Grid.gd" id="4_j68ae"]
 [ext_resource type="Script" path="res://Scripts/ItemListBase.gd" id="7_gfjl3"]
+[ext_resource type="PackedScene" uid="uid://kwo42inropgq" path="res://Scenes/ResizeableBar.tscn" id="8_hyj0c"]
 [ext_resource type="PackedScene" uid="uid://snu6npgdhy3" path="res://Scenes/GraphsPreview.tscn" id="9_7eiox"]
-[ext_resource type="PackedScene" uid="uid://kctlpbwxtd68" path="res://Scenes/GraphPreviewItem.tscn" id="10_y2pkd"]
-[ext_resource type="PackedScene" uid="uid://ct0syn32mxtou" path="res://Scenes/OptionsBar.tscn" id="11_wygwn"]
+[ext_resource type="PackedScene" uid="uid://ct0syn32mxtou" path="res://Scenes/OptionsPanel.tscn" id="11_wygwn"]
 
-[node name="Editor" type="Node2D" node_paths=PackedStringArray("open_dialog", "save_dialog")]
+[node name="Editor" type="Node2D" node_paths=PackedStringArray("open_dialog", "save_dialog", "export_popup", "start_x", "start_y", "width", "height")]
 script = ExtResource("1_32imw")
 graph_item_scene = ExtResource("2_k3sde")
 open_dialog = NodePath("OpenDialog")
 save_dialog = NodePath("SaveDialog")
+export_popup = NodePath("PopupPanel")
+start_x = NodePath("PopupPanel/OptionsContainer/Options/SpinBox")
+start_y = NodePath("PopupPanel/OptionsContainer/Options/SpinBox2")
+width = NodePath("PopupPanel/OptionsContainer/Options/SpinBox3")
+height = NodePath("PopupPanel/OptionsContainer/Options/SpinBox4")
+
+[node name="GraphVisualizer" type="Node2D" parent="."]
+unique_name_in_owner = true
+z_index = 1
+script = ExtResource("1_lv1lg")
+control_point_scene = ExtResource("2_8a8t4")
 
 [node name="Axis" parent="." instance=ExtResource("3_2nxg0")]
 unique_name_in_owner = true
@@ -32,12 +43,17 @@ horizontalColor = Color(0, 0, 0, 1)
 [node name="GraphCamera" type="Camera2D" parent="."]
 script = ExtResource("3_1qmvv")
 
-[node name="GraphVisualizer" type="Node2D" parent="."]
-unique_name_in_owner = true
-script = ExtResource("1_lv1lg")
-control_point_scene = ExtResource("2_8a8t4")
+[node name="OpenDialog" type="NativeFileDialog" parent="."]
+title = "Open a File"
+file_mode = 0
+filters = PackedStringArray("*.ed *.res *.tres ; Supported graphs", "* ; All")
+
+[node name="SaveDialog" type="NativeFileDialog" parent="."]
+title = "Save a graph"
+filters = PackedStringArray("*.ed *.res *.tres ; Supported graphs", "* ; All")
 
 [node name="UI" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 
 [node name="ToolBar" type="PanelContainer" parent="UI"]
 anchors_preset = -1
@@ -56,47 +72,57 @@ text = "Open graph"
 
 [node name="SaveGraph" type="Button" parent="UI/ToolBar/Tools"]
 layout_mode = 2
-text = "SaveGraph
+text = "Save Graph
 "
 
-[node name="PanelContainer" type="PanelContainer" parent="UI"]
+[node name="ExportGraph" type="Button" parent="UI/ToolBar/Tools"]
+layout_mode = 2
+text = "Export Graph"
+
+[node name="GraphsPanel" type="PanelContainer" parent="UI"]
 anchors_preset = -1
 anchor_top = 0.05
 anchor_right = 0.2
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="SideBar" type="VBoxContainer" parent="UI/PanelContainer"]
-layout_mode = 2
+mouse_force_pass_scroll_events = false
 metadata/_edit_use_anchors_ = true
 
-[node name="Header" type="HBoxContainer" parent="UI/PanelContainer/SideBar"]
+[node name="SidebarContainer" type="HBoxContainer" parent="UI/GraphsPanel"]
+layout_mode = 2
+
+[node name="SideBar" type="VBoxContainer" parent="UI/GraphsPanel/SidebarContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Header" type="HBoxContainer" parent="UI/GraphsPanel/SidebarContainer/SideBar"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="AddGraph" type="Button" parent="UI/PanelContainer/SideBar/Header"]
+[node name="AddGraph" type="Button" parent="UI/GraphsPanel/SidebarContainer/SideBar/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Add"
 
-[node name="RemoveGraph" type="Button" parent="UI/PanelContainer/SideBar/Header"]
+[node name="RemoveGraph" type="Button" parent="UI/GraphsPanel/SidebarContainer/SideBar/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Remove
 "
 
-[node name="GraphItems" type="VSplitContainer" parent="UI/PanelContainer/SideBar"]
+[node name="GraphItems" type="VSplitContainer" parent="UI/GraphsPanel/SidebarContainer/SideBar"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="GraphsListContainer" type="ScrollContainer" parent="UI/PanelContainer/SideBar/GraphItems"]
+[node name="GraphsListContainer" type="ScrollContainer" parent="UI/GraphsPanel/SidebarContainer/SideBar/GraphItems"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="GraphsList" type="VBoxContainer" parent="UI/PanelContainer/SideBar/GraphItems/GraphsListContainer"]
+[node name="GraphsList" type="VBoxContainer" parent="UI/GraphsPanel/SidebarContainer/SideBar/GraphItems/GraphsListContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -104,31 +130,91 @@ size_flags_vertical = 3
 script = ExtResource("7_gfjl3")
 item_group = "Item"
 
-[node name="GraphsPreviewContainer" type="ScrollContainer" parent="UI/PanelContainer/SideBar/GraphItems"]
+[node name="GraphsPreviewContainer" type="ScrollContainer" parent="UI/GraphsPanel/SidebarContainer/SideBar/GraphItems"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="GraphsPreview" parent="UI/PanelContainer/SideBar/GraphItems/GraphsPreviewContainer" node_paths=PackedStringArray("editor") instance=ExtResource("9_7eiox")]
+[node name="GraphsPreview" parent="UI/GraphsPanel/SidebarContainer/SideBar/GraphItems/GraphsPreviewContainer" node_paths=PackedStringArray("editor") instance=ExtResource("9_7eiox")]
 unique_name_in_owner = true
 layout_mode = 2
-editor = NodePath("../../../../../..")
-premade_graphs = "res://Graphs"
-graph_preview_scene = ExtResource("10_y2pkd")
+editor = NodePath("../../../../../../..")
+premade_graphs = "res://PremadeGraphs"
 
-[node name="OptionsBar" parent="UI" instance=ExtResource("11_wygwn")]
+[node name="ResizeBar" parent="UI/GraphsPanel/SidebarContainer" node_paths=PackedStringArray("root") instance=ExtResource("8_hyj0c")]
+layout_mode = 2
+size_flags_horizontal = 8
+root = NodePath("../..")
+max_size = 1.0
+min_size = 0.1
+anchor = 2
 
-[node name="OpenDialog" type="NativeFileDialog" parent="."]
-title = "Open a File"
-file_mode = 0
-filters = PackedStringArray("*.ed *.res *.tres ; Supported graphs", "* ; All")
+[node name="OptionsPanel" parent="UI" instance=ExtResource("11_wygwn")]
 
-[node name="SaveDialog" type="NativeFileDialog" parent="."]
-title = "Save a graph"
-filters = PackedStringArray("*.ed *.res *.tres ; Supported graphs", "* ; All")
+[node name="PopupPanel" type="PopupPanel" parent="."]
+size = Vector2i(400, 400)
+visible = true
 
-[connection signal="pressed" from="UI/ToolBar/Tools/LoadGraph" to="." method="_load_graph_pressed"]
-[connection signal="pressed" from="UI/ToolBar/Tools/SaveGraph" to="." method="_save_graph_pressed"]
-[connection signal="pressed" from="UI/PanelContainer/SideBar/Header/AddGraph" to="." method="add_graph"]
-[connection signal="pressed" from="UI/PanelContainer/SideBar/Header/RemoveGraph" to="." method="remove_graph"]
+[node name="OptionsContainer" type="VBoxContainer" parent="PopupPanel"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 396.0
+offset_bottom = 396.0
+
+[node name="Options" type="GridContainer" parent="PopupPanel/OptionsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="Label" type="Label" parent="PopupPanel/OptionsContainer/Options"]
+layout_mode = 2
+text = "Start X"
+
+[node name="SpinBox" type="SpinBox" parent="PopupPanel/OptionsContainer/Options"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -9999.0
+max_value = 9999.0
+
+[node name="Label2" type="Label" parent="PopupPanel/OptionsContainer/Options"]
+layout_mode = 2
+text = "Start Y
+"
+
+[node name="SpinBox2" type="SpinBox" parent="PopupPanel/OptionsContainer/Options"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -9999.0
+max_value = 9999.0
+
+[node name="Label3" type="Label" parent="PopupPanel/OptionsContainer/Options"]
+layout_mode = 2
+text = "Width"
+
+[node name="SpinBox3" type="SpinBox" parent="PopupPanel/OptionsContainer/Options"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -9999.0
+max_value = 9999.0
+
+[node name="Label4" type="Label" parent="PopupPanel/OptionsContainer/Options"]
+layout_mode = 2
+text = "Height"
+
+[node name="SpinBox4" type="SpinBox" parent="PopupPanel/OptionsContainer/Options"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -9999.0
+max_value = 9999.0
+
+[node name="Export" type="Button" parent="PopupPanel/OptionsContainer"]
+layout_mode = 2
+text = "Export"
+
 [connection signal="file_selected" from="OpenDialog" to="." method="load_graph"]
 [connection signal="file_selected" from="SaveDialog" to="." method="save_graph"]
+[connection signal="pressed" from="UI/ToolBar/Tools/LoadGraph" to="." method="_load_graph_pressed"]
+[connection signal="pressed" from="UI/ToolBar/Tools/SaveGraph" to="." method="_save_graph_pressed"]
+[connection signal="pressed" from="UI/ToolBar/Tools/ExportGraph" to="." method="export_pressed"]
+[connection signal="pressed" from="UI/GraphsPanel/SidebarContainer/SideBar/Header/AddGraph" to="." method="add_graph"]
+[connection signal="pressed" from="UI/GraphsPanel/SidebarContainer/SideBar/Header/RemoveGraph" to="." method="remove_graph"]
+[connection signal="pressed" from="PopupPanel/OptionsContainer/Export" to="." method="export_graph"]

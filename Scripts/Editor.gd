@@ -10,19 +10,28 @@ extends Node2D
 @export var open_dialog : NativeFileDialog
 @export var save_dialog : NativeFileDialog
 
-
-#func _input(event):
-#	if event is InputEventKey:
-#		if event.is_action_pressed("ui_accept"):
-#			save_dialog.show()
-#		if event.is_action_pressed("ui_cancel"):
-#			open_dialog.show()
-#			#save_manager.save_graph(Globals.graphs[Globals.selected_graph], file_dialog.)
+@export_group("Export menu")
+@export var export_popup : PopupPanel
+@export var start_x : SpinBox
+@export var start_y : SpinBox
+@export var width : SpinBox
+@export var height : SpinBox
 
 
-#func _process(delta):
-#	if is_instance_valid(Globals.selected_item):
-#		$UI/LineEdit.text = str(Globals.selected_item.global_position)
+func export_graph():
+	if len(Globals.graphs) > 0:
+		var start_pos := Vector2(start_x.value, start_y.value)
+		var size := Vector2(width.value, height.value)
+		%UI.visible = false
+		export_popup.visible = false
+		await get_tree().process_frame
+		await get_tree().process_frame
+		#get_viewport().get_preview(Vector2(500, 500))
+		var viewport_transform = get_viewport_transform().origin
+		print(size.x)
+		#get_viewport().get_texture().get_image().get_region(Rect2i(start_pos.x + viewport_transform.x, start_pos.y + viewport_transform.y, viewport_transform.x + end_pos.x, DisplayServer.window_get_size().y -(viewport_transform.y + end_pos.y))).save_png("res://test.png")
+		get_viewport().get_texture().get_image().get_region(Rect2i(viewport_transform.x + start_pos.x, viewport_transform.y - start_pos.y, size.x, size.y)).save_png("res://test.png")
+		%UI.visible = true
 
 
 func save_graph(location : String) -> void:
@@ -82,3 +91,7 @@ func _load_graph_pressed():
 func _save_graph_pressed():
 	if Globals.selected_graph != -1:
 		save_dialog.show()
+
+
+func export_pressed():
+	export_popup.popup_centered()
