@@ -16,7 +16,6 @@ func _ready():
 func refresh():
 	var graphs_directory = DirAccess.open(premade_graphs)
 	for graph_file in graphs_directory.get_files():
-		# TODO #17 (Fix crappy path grabbing)
 		var graph_resource = FileManager.load_data(graphs_directory.get_current_dir() + "/" + graph_file)
 		
 		if previews.has(graph_resource.points):

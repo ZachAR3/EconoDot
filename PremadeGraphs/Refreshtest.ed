@@ -1,0 +1,4 @@
+Object(Resource,"resource_local_to_scene":false,"resource_name":"","script":Resource("res://Scripts/GraphResource.gd"),"points":{
+Vector2(-51, -206): [Vector2(-81, -206), Vector2(-21, -206), false],
+Vector2(139, 75): [Vector2(109, 75), Vector2(169, 75), false]
+},"color":Color(0.996078, 0.498039, 0.176471, 1),"width":2,"name":"New graph","visible":true)
