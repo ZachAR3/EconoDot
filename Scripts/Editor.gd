@@ -20,9 +20,9 @@ extends Node2D
 #			#save_manager.save_graph(Globals.graphs[Globals.selected_graph], file_dialog.)
 
 
-func _process(delta):
-	if is_instance_valid(Globals.selected_item):
-		$UI/LineEdit.text = str(Globals.selected_item.global_position)
+#func _process(delta):
+#	if is_instance_valid(Globals.selected_item):
+#		$UI/LineEdit.text = str(Globals.selected_item.global_position)
 
 
 func save_graph(location : String) -> void:
@@ -32,7 +32,7 @@ func save_graph(location : String) -> void:
 func load_graph(graph_path : String, graph_object : GraphResource = GraphResource.new()):
 	var loaded_graph_resources = save_manager.load_graph(graph_path) if !graph_path.is_empty() else graph_object
 	# Adds a new graph item to house the loaded points
-	Globals.selected_graph = add_graph(loaded_graph_resources.name)
+	Globals.selected_graph = add_graph(loaded_graph_resources)
 	# Adds all points from given resource
 	for point in loaded_graph_resources.points:
 		var new_point = graph_visualizer.add_point(point)
@@ -42,15 +42,15 @@ func load_graph(graph_path : String, graph_object : GraphResource = GraphResourc
 		graph_visualizer.update_curve()
 
 
-func add_graph(title := "New graph") -> int:
+func add_graph(graph_resources := GraphResource.new()) -> int:
 #	Adds our new graph to the list and to our global graphs dictionary and initializing the points list
 	var graph = graph_item_scene.instantiate()
 	# A bit unecessary... TODO if changing back to grabbing by name or giving it as an exported variable
 	Globals.get_first_in_group(graph, "Item").item_selected.connect(item_selected)
 	var new_graph = Graph.new()
-	#new_graph.text = title
+	new_graph.resources = graph_resources
 	graph_visualizer.add_child(new_graph)
-	var index = graphs_list.add_item(title, graph)
+	var index = graphs_list.add_item(graph_resources.name, graph)
 	Globals.graphs.insert(index, new_graph)
 	return index
 

@@ -1,0 +1,4 @@
+Object(Resource,"resource_local_to_scene":false,"resource_name":"","script":Resource("res://Scripts/GraphResource.gd"),"points":{
+Vector2(-350, -450): [Vector2(-380, -450), Vector2(-320, -450), false],
+Vector2(0, 150): [Vector2(-30, 150), Vector2(30, 150), false]
+},"color":Color(0.996078, 0.498039, 0.176471, 1),"width":2,"name":"Test2")

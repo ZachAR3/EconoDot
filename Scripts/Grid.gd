@@ -18,7 +18,7 @@ func _draw():
 
 func calculate_lines():
 	var screen_size := DisplayServer.window_get_size()
-	Globals.snappable_axis = Globals.snappable_axis.filter(func(snappable) : !grid_lines.has(snappable))
+	Globals.snappable_axis = Globals.snappable_axis.filter(func(snappable) : return !grid_lines.has(snappable))
 	grid_lines = []
 	if draw_horizontal:
 		var lower_bound = ((camera.global_position.y - (screen_size.y / camera.zoom.y)) / horizontal_gap)

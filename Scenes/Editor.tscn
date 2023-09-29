@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bpbsx078wocty"]
+[gd_scene load_steps=12 format=3 uid="uid://bpbsx078wocty"]
 
 [ext_resource type="Script" path="res://Scripts/Editor.gd" id="1_32imw"]
 [ext_resource type="Script" path="res://Scripts/GraphVisualizer.gd" id="1_lv1lg"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Scripts/ItemListBase.gd" id="7_gfjl3"]
 [ext_resource type="PackedScene" uid="uid://snu6npgdhy3" path="res://Scenes/GraphsPreview.tscn" id="9_7eiox"]
 [ext_resource type="PackedScene" uid="uid://kctlpbwxtd68" path="res://Scenes/GraphPreviewItem.tscn" id="10_y2pkd"]
+[ext_resource type="PackedScene" uid="uid://ct0syn32mxtou" path="res://Scenes/OptionsBar.tscn" id="11_wygwn"]
 
 [node name="Editor" type="Node2D" node_paths=PackedStringArray("open_dialog", "save_dialog")]
 script = ExtResource("1_32imw")
@@ -18,13 +19,15 @@ open_dialog = NodePath("OpenDialog")
 save_dialog = NodePath("SaveDialog")
 
 [node name="Axis" parent="." instance=ExtResource("3_2nxg0")]
+unique_name_in_owner = true
 
 [node name="Grid" type="Node2D" parent="."]
+unique_name_in_owner = true
 z_index = -1
 script = ExtResource("4_j68ae")
 position_vector = Vector2(200, 200)
-verticalColor = Color(0.768627, 0.32549, 0.0627451, 1)
-horizontalColor = Color(0.333333, 0.588235, 0.556863, 1)
+verticalColor = Color(0, 0, 0, 1)
+horizontalColor = Color(0, 0, 0, 1)
 
 [node name="GraphCamera" type="Camera2D" parent="."]
 script = ExtResource("3_1qmvv")
@@ -55,15 +58,6 @@ text = "Open graph"
 layout_mode = 2
 text = "SaveGraph
 "
-
-[node name="LineEdit" type="LineEdit" parent="UI"]
-anchors_preset = -1
-anchor_left = 0.9
-anchor_top = 0.05
-anchor_right = 1.0
-anchor_bottom = 1.00154
-size_flags_horizontal = 8
-metadata/_edit_use_anchors_ = true
 
 [node name="PanelContainer" type="PanelContainer" parent="UI"]
 anchors_preset = -1
@@ -120,6 +114,8 @@ layout_mode = 2
 editor = NodePath("../../../../../..")
 premade_graphs = "res://Graphs"
 graph_preview_scene = ExtResource("10_y2pkd")
+
+[node name="OptionsBar" parent="UI" instance=ExtResource("11_wygwn")]
 
 [node name="OpenDialog" type="NativeFileDialog" parent="."]
 title = "Open a File"

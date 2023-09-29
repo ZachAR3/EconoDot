@@ -11,18 +11,25 @@ class_name Axis
 @export var verticalColor := Color.BLUE
 @export var horizontalColor := Color.RED
 
+var axis := AxisResource.new()
+
 
 func _ready():
-	var axis = AxisResource.new()
+	camera.camera_moved.connect(queue_redraw)
+	update_axis()
+	queue_redraw()
+	
+	Globals.snappable_axis.append(axis)
+
+
+func update_axis():
 	axis.horizontal_axis = draw_horizontal
 	axis.vertical_axis = draw_vertical
 	axis.axis_position = position_vector
-	Globals.snappable_axis.append(axis)
-	camera.camera_moved.connect(queue_redraw)
-	queue_redraw()
 
 
 func _draw():
+	update_axis()
 	# Base behaviour for orign
 	if draw_vertical:
 		draw_screen_line(true, position_vector)

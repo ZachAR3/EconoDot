@@ -6,6 +6,8 @@ extends Node2D
 var mode
 var mouse_offset := Vector2.ZERO
 
+signal curve_updated
+
 enum {
 	ADD,
 	EDIT,
@@ -57,6 +59,7 @@ func update_curve():
 			var handle_2 = int(point.handles_enabled) * point.handles[1].position
 			
 			graph.curve.add_point(point.global_position, handle_1, handle_2)
+	curve_updated.emit()
 	queue_redraw()
 
 

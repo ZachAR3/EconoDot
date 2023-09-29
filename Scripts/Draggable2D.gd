@@ -5,7 +5,6 @@ class_name Draggable2D
 
 @export var snap := true
 @export var snap_threshold := 10.0
-#@export var snap_position := Vector2.ZERO
 
 var hovered := false
 var grabbed := false

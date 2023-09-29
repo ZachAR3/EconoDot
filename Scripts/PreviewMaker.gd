@@ -53,7 +53,9 @@ func remap_points():
 		new_scale = Vector2(source_size.x * (preview_container.size.y / source_size.y), preview_container.size.y)
 	else:
 		new_scale = Vector2(preview_container.size.x, source_size.y * (preview_container.size.x / source_size.x))
-	preview.custom_minimum_size = new_scale
+		
+	# TODO potentially fix the scaling breaking if setting X min size
+	preview.custom_minimum_size.y = new_scale.y
 	
 #	Fit the points into our new mapped and aspect correct container 
 	remapped_points = points.duplicate()
