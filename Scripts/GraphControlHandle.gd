@@ -19,6 +19,11 @@ func _unhandled_input(event):
 		moved.emit()
 
 
+func selection_updated(selected : bool):
+	if selected:
+		Globals.selected_item = self
+
+
 func move(new_position : Vector2):
 	enabled = true
 	global_position = new_position

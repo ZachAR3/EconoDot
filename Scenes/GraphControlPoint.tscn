@@ -7,6 +7,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_lwskf"]
 
 [node name="ControlPoint" type="Area2D" node_paths=PackedStringArray("handles")]
+monitoring = false
 monitorable = false
 script = ExtResource("2_a5dw6")
 handles = [NodePath("Handle1"), NodePath("Handle2")]

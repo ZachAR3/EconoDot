@@ -21,8 +21,9 @@ func _ready():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("Select"):
-		grabbed = hovered && !grabbed
-		selection_updated(hovered)
+		var other_selected = (is_instance_valid(Globals.selected_item) && Globals.selected_item != self && global_position.distance_to(Globals.selected_item.global_position) < 10)
+		grabbed = hovered && !grabbed && !other_selected
+		selection_updated(hovered && !other_selected)
 	if event.is_action_released("Select"):
 		grabbed = false
 	if event is InputEventMouseMotion:

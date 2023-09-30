@@ -18,7 +18,7 @@ func _unhandled_input(event):
 
 
 func move(new_position : Vector2):
-	global_position = new_position #+ mouse_offset
+	global_position = new_position
 	moved.emit()
 
 
