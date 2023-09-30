@@ -14,6 +14,7 @@ func _ready():
 func selection_updated(selected := false):
 	super(selected)
 	if selected:
+		Globals.selected_item = self
 		if last_click_time >= (Time.get_ticks_msec() / 1000) - double_click_threshold:
 			line_edit.editable = true
 		last_click_time = Time.get_ticks_msec() / 1000

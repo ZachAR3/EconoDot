@@ -13,6 +13,8 @@ var grabbed := false
 var mouse_offset : Vector2
 var mouse_position : Vector2
 
+signal moved
+
 
 func _ready():
 	mouse_entered.connect(_mouse_entered)
@@ -26,7 +28,7 @@ func _gui_input(event):
 	if event.is_action_released("Select"):
 		grabbed = false
 	if event is InputEventMouseMotion:
-		mouse_position = event.global_position
+		mouse_position = get_global_mouse_position()
 		if grabbed:
 			follow_mouse()
 			queue_redraw()
@@ -38,12 +40,13 @@ func follow_mouse():
 	var target_position = mouse_position + mouse_offset
 	target_position = Globals.snap(target_position + snap_offset, snap_threshold) if snap else target_position
 	
-	move(target_position)
+	move(target_position - snap_offset)
 
 
 func move(new_position : Vector2):
 	# Meant to be overrode with movement code
-	global_position = new_position - snap_offset
+	global_position = new_position
+	moved.emit()
 
 
 # Added for functions which need to know when grabbed is updated

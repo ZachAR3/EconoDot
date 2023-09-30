@@ -18,7 +18,8 @@ extends PanelContainer
 
 
 func _ready():
-	%GraphVisualizer.curve_updated.connect(curve_updated)
+	#TODO
+	#%GraphVisualizer.curve_updated.connect(curve_updated)
 	grid_gap_updated()
 
 
@@ -36,14 +37,16 @@ func axis_options_visible_toggled():
 
 
 # Graph options
-func curve_updated():
+# TODO
+#func curve_updated():
+func _process(delta):
 	if is_instance_valid(Globals.selected_item):
 #		Used to prevent infinite recursion from updating calling move calling updating 
 		x_coords.set_block_signals(true)
 		y_coords.set_block_signals(true)
-		
-		x_coords.value = Globals.selected_item.global_position.x
-		y_coords.value = -Globals.selected_item.global_position.y
+
+		x_coords.value = Globals.selected_item.global_position.x + Globals.selected_item.snap_offset.x
+		y_coords.value = -Globals.selected_item.global_position.y - Globals.selected_item.snap_offset.y
 		
 		x_coords.set_block_signals(false)
 		y_coords.set_block_signals(false)
@@ -51,7 +54,7 @@ func curve_updated():
 
 func coordinates_updated():
 	if is_instance_valid(Globals.selected_item):
-		Globals.selected_item.move(Vector2(x_coords.value, -y_coords.value))
+		Globals.selected_item.move(Vector2(x_coords.value - Globals.selected_item.snap_offset.x, -y_coords.value - Globals.selected_item.snap_offset.y))
 
 
 func graph_color_updated(color : Color):

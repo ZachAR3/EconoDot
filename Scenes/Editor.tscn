@@ -170,6 +170,7 @@ min_size = 0.1
 anchor = 2
 
 [node name="OptionsPanel" parent="UI" instance=ExtResource("11_wygwn")]
+unique_name_in_owner = true
 
 [node name="ExportPopup" type="PopupPanel" parent="."]
 size = Vector2i(400, 400)
