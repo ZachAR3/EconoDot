@@ -33,7 +33,7 @@ func _gui_input(event):
 			follow_mouse()
 			queue_redraw()
 		else:
-			mouse_offset = Vector2(global_position.x - mouse_position.x, global_position.y - mouse_position.y)
+			mouse_offset = Vector2(global_position.x - mouse_position.x, global_position.y - mouse_position.y) + pivot_offset.rotated(rotation)
 
 
 func follow_mouse():

@@ -108,6 +108,22 @@ size_flags_vertical = 0
 min_value = -10000.0
 max_value = 10000.0
 
+[node name="RotationContainer" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions"]
+layout_mode = 2
+
+[node name="RotationLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/RotationContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Rotation:"
+
+[node name="Rotation" type="SpinBox" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/RotationContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+tooltip_text = "Only works for labels"
+min_value = -360.0
+max_value = 360.0
+
 [node name="GraphThickness" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions"]
 layout_mode = 2
 
@@ -375,6 +391,7 @@ button_pressed = true
 [connection signal="toggled" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/ControlPointsVisible/ShowControlPoints" to="." method="show_control_points_toggled"]
 [connection signal="value_changed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/XCoordsContainer/XCoords" to="." method="coordinates_updated" unbinds=1]
 [connection signal="value_changed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/YCoordsContainer/YCoords" to="." method="coordinates_updated" unbinds=1]
+[connection signal="value_changed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/RotationContainer/Rotation" to="." method="rotation_updated"]
 [connection signal="value_changed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/GraphThickness/GraphThickness" to="." method="graph_thickness_updated"]
 [connection signal="color_changed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/ColorContainer/ColorPicker" to="." method="graph_color_updated"]
 [connection signal="pressed" from="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptionsButton" to="." method="grid_options_visible_toggled"]

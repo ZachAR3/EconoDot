@@ -45,8 +45,9 @@ func _process(delta):
 		x_coords.set_block_signals(true)
 		y_coords.set_block_signals(true)
 
-		x_coords.value = Globals.selected_item.global_position.x + Globals.selected_item.snap_offset.x
-		y_coords.value = -Globals.selected_item.global_position.y - Globals.selected_item.snap_offset.y
+		var pivot = Globals.selected_item.pivot_offset.rotated(Globals.selected_item.rotation)
+		x_coords.value = Globals.selected_item.global_position.x + pivot.x
+		y_coords.value = -Globals.selected_item.global_position.y - pivot.y
 		
 		x_coords.set_block_signals(false)
 		y_coords.set_block_signals(false)
@@ -54,7 +55,8 @@ func _process(delta):
 
 func coordinates_updated():
 	if is_instance_valid(Globals.selected_item):
-		Globals.selected_item.move(Vector2(x_coords.value - Globals.selected_item.snap_offset.x, -y_coords.value - Globals.selected_item.snap_offset.y))
+		Globals.selected_item.move(Vector2(x_coords.value, y_coords.value))
+
 
 
 func graph_color_updated(color : Color):
@@ -145,3 +147,7 @@ func vertical_axis_enabled(enabled : bool):
 	%Axis.draw_vertical = enabled
 	%Axis.queue_redraw()
 
+
+func rotation_updated(new_rotation):
+	if is_instance_valid(Globals.selected_item) && Globals.selected_item is DraggableControl:
+		Globals.selected_item.rotation = deg_to_rad(new_rotation)

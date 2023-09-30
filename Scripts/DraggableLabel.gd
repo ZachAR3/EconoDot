@@ -8,10 +8,11 @@ var last_click_time = 0
 
 func _ready():
 	super()
-	snap_offset = size / 2
+	pivot_offset = (size / 2)
 
 
 func selection_updated(selected := false):
+	pivot_offset = (size / 2)
 	super(selected)
 	if selected:
 		Globals.selected_item = self
@@ -20,5 +21,8 @@ func selection_updated(selected := false):
 		last_click_time = Time.get_ticks_msec() / 1000
 	else:
 		line_edit.editable = false
-	
+
+
+func move(new_pos : Vector2) -> void:
+	global_position = new_pos - pivot_offset
 
