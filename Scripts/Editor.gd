@@ -19,6 +19,10 @@ extends Node2D
 @export var height : SpinBox
 
 
+func _ready():
+	get_tree().get_root().files_dropped.connect(file_dropped)
+
+
 func export_graph():
 	if len(Globals.graphs) > 0:
 		var start_pos := Vector2(start_x.value, start_y.value)
@@ -103,3 +107,10 @@ func add_label():
 func remove_label():
 	if is_instance_valid(Globals.selected_item) && Globals.selected_item is DraggableControl:
 		Globals.selected_item.queue_free()
+
+
+func file_dropped(files : PackedStringArray) -> void:
+	var file_path = files[0]
+	if file_path.get_extension() == "ed":
+		load_graph(file_path)
+	
