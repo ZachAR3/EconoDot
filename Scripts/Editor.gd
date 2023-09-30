@@ -1,6 +1,8 @@
 extends Node2D
 
 
+@export var settings_popup : PopupPanel
+
 @onready var graphs_explorer = %GraphsPreview
 @onready var graphs_list = %GraphsList
 @onready var graph_visualizer = %GraphVisualizer
@@ -114,3 +116,11 @@ func file_dropped(files : PackedStringArray) -> void:
 	if file_path.get_extension() == "ed":
 		load_graph(file_path)
 	
+
+
+func open_settings():
+	settings_popup.popup_centered()
+
+
+func quit():
+	get_tree().quit()

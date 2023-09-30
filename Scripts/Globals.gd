@@ -6,6 +6,7 @@ var selected_graph := -1
 var selected_item
 # = [[axis or pos, position (Vector2)]
 var snappable_axis : Array[AxisResource] = []
+var graphs_directory := "res://PremadeGraphs/"
 
 # Colors
 var primary = Color('#75b9be')

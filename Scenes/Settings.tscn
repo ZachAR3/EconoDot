@@ -1,0 +1,116 @@
+[gd_scene load_steps=3 format=3 uid="uid://bip055fimwire"]
+
+[ext_resource type="Script" path="res://Scripts/Settings.gd" id="1_x7tyc"]
+[ext_resource type="PackedScene" uid="uid://bxua4vv8kkjg0" path="res://Scenes/RemappableKey.tscn" id="2_nmoo8"]
+
+[node name="SettingsPopup" type="PopupPanel" node_paths=PackedStringArray("window_mode", "graphs_directory", "background_color", "graph_directory_explorer")]
+size = Vector2i(300, 300)
+visible = true
+script = ExtResource("1_x7tyc")
+window_mode = NodePath("SettingsCenterContainer/SettingsVBox/WindowMode")
+graphs_directory = NodePath("SettingsCenterContainer/SettingsVBox/GraphsDirectory")
+background_color = NodePath("SettingsCenterContainer/SettingsVBox/BackgroundColor")
+graph_directory_explorer = NodePath("GraphDirectoryExplorer")
+
+[node name="SettingsCenterContainer" type="ScrollContainer" parent="."]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 296.0
+offset_bottom = 296.0
+
+[node name="SettingsVBox" type="VBoxContainer" parent="SettingsCenterContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="KeybindsLabel" type="Label" parent="SettingsCenterContainer/SettingsVBox"]
+layout_mode = 2
+text = "Keybinds"
+horizontal_alignment = 1
+
+[node name="KeybindsContainer" type="GridContainer" parent="SettingsCenterContainer/SettingsVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="SelectKeybindLabel" type="Label" parent="SettingsCenterContainer/SettingsVBox/KeybindsContainer"]
+layout_mode = 2
+text = "Select"
+
+[node name="SelectKeybind" parent="SettingsCenterContainer/SettingsVBox/KeybindsContainer" instance=ExtResource("2_nmoo8")]
+layout_mode = 2
+action = "Select"
+
+[node name="AddModeKeybindLabel" type="Label" parent="SettingsCenterContainer/SettingsVBox/KeybindsContainer"]
+layout_mode = 2
+text = "Add mode"
+
+[node name="AddModeKeybind" parent="SettingsCenterContainer/SettingsVBox/KeybindsContainer" instance=ExtResource("2_nmoo8")]
+layout_mode = 2
+action = "AddMode"
+
+[node name="EditModeKeybindLabel" type="Label" parent="SettingsCenterContainer/SettingsVBox/KeybindsContainer"]
+layout_mode = 2
+text = "Select mode"
+
+[node name="EditModeKeybind" parent="SettingsCenterContainer/SettingsVBox/KeybindsContainer" instance=ExtResource("2_nmoo8")]
+layout_mode = 2
+action = "EditMode"
+
+[node name="DeleteKeybindLabel" type="Label" parent="SettingsCenterContainer/SettingsVBox/KeybindsContainer"]
+layout_mode = 2
+text = "Delete"
+
+[node name="DeleteKeybind" parent="SettingsCenterContainer/SettingsVBox/KeybindsContainer" instance=ExtResource("2_nmoo8")]
+layout_mode = 2
+action = "Delete"
+
+[node name="MoveKeyindLabel" type="Label" parent="SettingsCenterContainer/SettingsVBox/KeybindsContainer"]
+layout_mode = 2
+text = "Move (shift)"
+
+[node name="MoveKeyind" parent="SettingsCenterContainer/SettingsVBox/KeybindsContainer" instance=ExtResource("2_nmoo8")]
+layout_mode = 2
+action = "Move"
+
+[node name="WindowModeLabel" type="Label" parent="SettingsCenterContainer/SettingsVBox"]
+layout_mode = 2
+text = "Window mode"
+horizontal_alignment = 1
+
+[node name="WindowMode" type="OptionButton" parent="SettingsCenterContainer/SettingsVBox"]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Borderless windowed"
+popup/item_1/id = 1
+popup/item_2/text = "Fullscreen"
+popup/item_2/id = 4
+
+[node name="BackgroundColorLabel" type="Label" parent="SettingsCenterContainer/SettingsVBox"]
+layout_mode = 2
+text = "Background color"
+horizontal_alignment = 1
+
+[node name="BackgroundColor" type="ColorPickerButton" parent="SettingsCenterContainer/SettingsVBox"]
+layout_mode = 2
+text = "-"
+color = Color(0.631373, 0.752941, 1, 1)
+
+[node name="GraphsDirectoryLabel" type="Label" parent="SettingsCenterContainer/SettingsVBox"]
+layout_mode = 2
+text = "Graphs directory"
+horizontal_alignment = 1
+
+[node name="GraphsDirectory" type="Button" parent="SettingsCenterContainer/SettingsVBox"]
+layout_mode = 2
+
+[node name="GraphDirectoryExplorer" type="NativeFileDialog" parent="."]
+title = "Open a Directory"
+file_mode = 2
+
+[connection signal="item_selected" from="SettingsCenterContainer/SettingsVBox/WindowMode" to="." method="update_window_mode"]
+[connection signal="color_changed" from="SettingsCenterContainer/SettingsVBox/BackgroundColor" to="." method="background_color_changed"]
+[connection signal="pressed" from="SettingsCenterContainer/SettingsVBox/GraphsDirectory" to="." method="update_graphs_directory_pressed"]
+[connection signal="dir_selected" from="GraphDirectoryExplorer" to="." method="update_graphs_directory"]

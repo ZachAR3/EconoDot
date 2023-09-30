@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bpbsx078wocty"]
+[gd_scene load_steps=14 format=3 uid="uid://bpbsx078wocty"]
 
 [ext_resource type="Script" path="res://Scripts/Editor.gd" id="1_32imw"]
 [ext_resource type="Script" path="res://Scripts/GraphVisualizer.gd" id="1_lv1lg"]
@@ -12,18 +12,20 @@
 [ext_resource type="PackedScene" uid="uid://kwo42inropgq" path="res://Scenes/ResizeableBar.tscn" id="8_hyj0c"]
 [ext_resource type="PackedScene" uid="uid://snu6npgdhy3" path="res://Scenes/GraphsPreview.tscn" id="9_7eiox"]
 [ext_resource type="PackedScene" uid="uid://ct0syn32mxtou" path="res://Scenes/OptionsPanel.tscn" id="11_wygwn"]
+[ext_resource type="PackedScene" uid="uid://bip055fimwire" path="res://Scenes/Settings.tscn" id="13_dql3p"]
 
-[node name="Editor" type="Node2D" node_paths=PackedStringArray("open_dialog", "save_dialog", "export_popup", "start_x", "start_y", "width", "height")]
+[node name="Editor" type="Node2D" node_paths=PackedStringArray("settings_popup", "open_dialog", "save_dialog", "export_popup", "start_x", "start_y", "width", "height")]
 script = ExtResource("1_32imw")
+settings_popup = NodePath("SettingsPopup")
 graph_item_scene = ExtResource("2_k3sde")
 label_scene = ExtResource("5_yfy7i")
 open_dialog = NodePath("OpenDialog")
 save_dialog = NodePath("SaveDialog")
-export_popup = NodePath("PopupPanel")
-start_x = NodePath("PopupPanel/OptionsContainer/Options/SpinBox")
-start_y = NodePath("PopupPanel/OptionsContainer/Options/SpinBox2")
-width = NodePath("PopupPanel/OptionsContainer/Options/SpinBox3")
-height = NodePath("PopupPanel/OptionsContainer/Options/SpinBox4")
+export_popup = NodePath("ExportPopup")
+start_x = NodePath("ExportPopup/OptionsContainer/Options/SpinBox")
+start_y = NodePath("ExportPopup/OptionsContainer/Options/SpinBox2")
+width = NodePath("ExportPopup/OptionsContainer/Options/SpinBox3")
+height = NodePath("ExportPopup/OptionsContainer/Options/SpinBox4")
 
 [node name="GraphVisualizer" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -89,6 +91,16 @@ text = "Add Label"
 layout_mode = 2
 text = "Remove Label"
 
+[node name="Settings" type="Button" parent="UI/ToolBar/Tools"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Quit" type="Button" parent="UI/ToolBar"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Quit"
+
 [node name="GraphsPanel" type="PanelContainer" parent="UI"]
 anchors_preset = -1
 anchor_top = 0.05
@@ -148,7 +160,6 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 layout_mode = 2
 editor = NodePath("../../../../../../..")
-premade_graphs = "res://PremadeGraphs"
 
 [node name="ResizeBar" parent="UI/GraphsPanel/SidebarContainer" node_paths=PackedStringArray("root") instance=ExtResource("8_hyj0c")]
 layout_mode = 2
@@ -160,64 +171,67 @@ anchor = 2
 
 [node name="OptionsPanel" parent="UI" instance=ExtResource("11_wygwn")]
 
-[node name="PopupPanel" type="PopupPanel" parent="."]
+[node name="ExportPopup" type="PopupPanel" parent="."]
 size = Vector2i(400, 400)
 
-[node name="OptionsContainer" type="VBoxContainer" parent="PopupPanel"]
+[node name="OptionsContainer" type="VBoxContainer" parent="ExportPopup"]
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 396.0
 offset_bottom = 396.0
 
-[node name="Options" type="GridContainer" parent="PopupPanel/OptionsContainer"]
+[node name="Options" type="GridContainer" parent="ExportPopup/OptionsContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 columns = 2
 
-[node name="Label" type="Label" parent="PopupPanel/OptionsContainer/Options"]
+[node name="Label" type="Label" parent="ExportPopup/OptionsContainer/Options"]
 layout_mode = 2
 text = "Start X"
 
-[node name="SpinBox" type="SpinBox" parent="PopupPanel/OptionsContainer/Options"]
+[node name="SpinBox" type="SpinBox" parent="ExportPopup/OptionsContainer/Options"]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -9999.0
 max_value = 9999.0
 
-[node name="Label2" type="Label" parent="PopupPanel/OptionsContainer/Options"]
+[node name="Label2" type="Label" parent="ExportPopup/OptionsContainer/Options"]
 layout_mode = 2
 text = "Start Y
 "
 
-[node name="SpinBox2" type="SpinBox" parent="PopupPanel/OptionsContainer/Options"]
+[node name="SpinBox2" type="SpinBox" parent="ExportPopup/OptionsContainer/Options"]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -9999.0
 max_value = 9999.0
 
-[node name="Label3" type="Label" parent="PopupPanel/OptionsContainer/Options"]
+[node name="Label3" type="Label" parent="ExportPopup/OptionsContainer/Options"]
 layout_mode = 2
 text = "Width"
 
-[node name="SpinBox3" type="SpinBox" parent="PopupPanel/OptionsContainer/Options"]
+[node name="SpinBox3" type="SpinBox" parent="ExportPopup/OptionsContainer/Options"]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -9999.0
 max_value = 9999.0
 
-[node name="Label4" type="Label" parent="PopupPanel/OptionsContainer/Options"]
+[node name="Label4" type="Label" parent="ExportPopup/OptionsContainer/Options"]
 layout_mode = 2
 text = "Height"
 
-[node name="SpinBox4" type="SpinBox" parent="PopupPanel/OptionsContainer/Options"]
+[node name="SpinBox4" type="SpinBox" parent="ExportPopup/OptionsContainer/Options"]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -9999.0
 max_value = 9999.0
 
-[node name="Export" type="Button" parent="PopupPanel/OptionsContainer"]
+[node name="Export" type="Button" parent="ExportPopup/OptionsContainer"]
 layout_mode = 2
 text = "Export"
+
+[node name="SettingsPopup" parent="." instance=ExtResource("13_dql3p")]
+visible = false
 
 [connection signal="file_selected" from="OpenDialog" to="." method="load_graph"]
 [connection signal="file_selected" from="SaveDialog" to="." method="save_graph"]
@@ -226,6 +240,8 @@ text = "Export"
 [connection signal="pressed" from="UI/ToolBar/Tools/ExportGraph" to="." method="export_pressed"]
 [connection signal="pressed" from="UI/ToolBar/Tools/AddLabel" to="." method="add_label"]
 [connection signal="pressed" from="UI/ToolBar/Tools/RemoveLabel" to="." method="remove_label"]
+[connection signal="pressed" from="UI/ToolBar/Tools/Settings" to="." method="open_settings"]
+[connection signal="pressed" from="UI/ToolBar/Quit" to="." method="quit"]
 [connection signal="pressed" from="UI/GraphsPanel/SidebarContainer/SideBar/Header/AddGraph" to="." method="add_graph"]
 [connection signal="pressed" from="UI/GraphsPanel/SidebarContainer/SideBar/Header/RemoveGraph" to="." method="remove_graph"]
-[connection signal="pressed" from="PopupPanel/OptionsContainer/Export" to="." method="export_graph"]
+[connection signal="pressed" from="ExportPopup/OptionsContainer/Export" to="." method="export_graph"]

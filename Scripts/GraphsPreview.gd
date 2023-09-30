@@ -2,7 +2,6 @@ extends ItemListBase
 
 
 @export var editor : Node2D
-@export_dir var premade_graphs : String
 @export var graph_preview_scene : PackedScene
 
 var previews := []
@@ -14,8 +13,11 @@ func _ready():
 
 
 func refresh():
-	var graphs_directory = DirAccess.open(premade_graphs)
+	var graphs_directory = DirAccess.open(Globals.graphs_directory)
 	for graph_file in graphs_directory.get_files():
+		if graph_file.get_extension() != "ed":
+			continue
+			
 		var graph_resource = FileManager.load_data(graphs_directory.get_current_dir() + "/" + graph_file)
 		
 		if previews.has(graph_resource.points):
