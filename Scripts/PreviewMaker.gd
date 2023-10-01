@@ -21,7 +21,7 @@ func _ready():
 func get_preview():
 	var graph_curve = Curve2D.new()
 	for point in graph.points:
-		var handles_enabled = graph.points[point][2]
+		var handles_enabled = graph.points[point][4]
 		
 		var handle_1 = int(handles_enabled) * graph.points[point][0]
 		var handle_2 = int(handles_enabled) * graph.points[point][1]

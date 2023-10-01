@@ -1,6 +1,6 @@
 Object(Resource,"resource_local_to_scene":false,"resource_name":"","script":Resource("res://Scripts/GraphResource.gd"),"points":{
-Vector2(-250, 0): [Vector2(-30, 0), Vector2(30, 0), false],
-Vector2(50, 0): [Vector2(-38.6667, 0.666656), Vector2(38.6667, -0.666656), false],
-Vector2(133.436, -31.9485): [Vector2(-27.538, 36.1028), Vector2(27.539, -36.1028), true],
-Vector2(150, -250): [Vector2(-30, 0), Vector2(30, 0), false]
-},"color":Color(0.270588, 0.298039, 1, 1),"width":2,"name":"Lorenz curve","visible":true)
+Vector2(-150, 0): [Vector2(-30, 0), Vector2(30, 0), Vector2(-180, 0), Vector2(-120, 0), false],
+Vector2(50, 0): [Vector2(-30, 0), Vector2(30, 0), Vector2(20, 0), Vector2(80, 0), false],
+Vector2(139.412, -60.0001): [Vector2(-17.0587, 66.4712), Vector2(17.0587, -66.4712), Vector2(122.353, 6.47118), Vector2(156.47, -126.471), true],
+Vector2(150, -200): [Vector2(-2.35272, 57.0594), Vector2(2.35272, -57.0594), Vector2(147.647, -142.941), Vector2(152.353, -257.059), true]
+},"color":Color(1, 0, 0.937255, 1),"width":2,"name":"Lorenz Curve","visible":true)

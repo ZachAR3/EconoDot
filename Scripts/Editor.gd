@@ -84,9 +84,9 @@ func load_graph(graph_path : String, graph_object : GraphResource = GraphResourc
 	# Adds all points from given resource
 	for point in loaded_graph_resources.points:
 		var new_point = graph_visualizer.add_point(point)
-		new_point.handles[0].global_position = loaded_graph_resources.points[point][0]
-		new_point.handles[1].global_position = loaded_graph_resources.points[point][1]
-		new_point.handles_enabled = loaded_graph_resources.points[point][2]
+		new_point.handles[0].global_position = loaded_graph_resources.points[point][2]
+		new_point.handles[1].global_position = loaded_graph_resources.points[point][3]
+		new_point.handles_enabled = loaded_graph_resources.points[point][4]
 		graph_visualizer.update_curve()
 
 
