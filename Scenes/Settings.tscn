@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://bip055fimwire"]
 
-[ext_resource type="Script" path="res://Scripts/Settings.gd" id="1_x7tyc"]
+[ext_resource type="Script" path="res://Scripts/Settings.gd" id="1_tbtvh"]
 [ext_resource type="PackedScene" uid="uid://bxua4vv8kkjg0" path="res://Scenes/RemappableKey.tscn" id="2_nmoo8"]
 
 [node name="SettingsPopup" type="PopupPanel" node_paths=PackedStringArray("window_mode", "graphs_directory", "background_color", "graph_directory_explorer")]
 size = Vector2i(300, 300)
 visible = true
-script = ExtResource("1_x7tyc")
+script = ExtResource("1_tbtvh")
 window_mode = NodePath("SettingsCenterContainer/SettingsVBox/WindowMode")
 graphs_directory = NodePath("SettingsCenterContainer/SettingsVBox/GraphsDirectory")
 background_color = NodePath("SettingsCenterContainer/SettingsVBox/BackgroundColor")
@@ -96,7 +96,7 @@ horizontal_alignment = 1
 [node name="BackgroundColor" type="ColorPickerButton" parent="SettingsCenterContainer/SettingsVBox"]
 layout_mode = 2
 text = "-"
-color = Color(0.631373, 0.752941, 1, 1)
+color = Color(0.270588, 0.478431, 0.67451, 1)
 
 [node name="GraphsDirectoryLabel" type="Label" parent="SettingsCenterContainer/SettingsVBox"]
 layout_mode = 2

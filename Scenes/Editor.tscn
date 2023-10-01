@@ -165,8 +165,8 @@ editor = NodePath("../../../../../../..")
 layout_mode = 2
 size_flags_horizontal = 8
 root = NodePath("../..")
-max_size = 1.0
-min_size = 0.1
+max_size = 0.5
+min_size = 0.15
 anchor = 2
 
 [node name="OptionsPanel" parent="UI" instance=ExtResource("11_wygwn")]

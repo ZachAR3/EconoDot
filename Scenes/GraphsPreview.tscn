@@ -1,9 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://snu6npgdhy3"]
 
-[ext_resource type="Script" path="res://Scripts/GraphsPreview.gd" id="1_xsomw"]
+[ext_resource type="Script" path="res://Scripts/GraphsPreview.gd" id="1_xem7c"]
 [ext_resource type="PackedScene" uid="uid://kctlpbwxtd68" path="res://Scenes/GraphPreviewItem.tscn" id="2_38clc"]
 
 [node name="GraphsPreview" type="GridContainer"]
+clip_contents = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -12,10 +13,9 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
-script = ExtResource("1_xsomw")
+script = ExtResource("1_xem7c")
 graph_preview_scene = ExtResource("2_38clc")
 item_group = "Item"
-metadata/_edit_use_anchors_ = true
 
 [node name="RefreshTimer" type="Timer" parent="."]
 autostart = true

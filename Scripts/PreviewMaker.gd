@@ -7,9 +7,16 @@ var graph
 var drawing_size
 var redraw = false
 
+var last_call_time := 0.0
+
 @export var preview : Control
 @export var preview_container : SubViewportContainer
 @export var padding := 5.0
+
+
+func _ready():
+	preview.get_parent().resized.connect(remap_points)
+
 
 func get_preview():
 	var graph_curve = Curve2D.new()
@@ -44,40 +51,35 @@ func get_drawing_size():
 
 
 func remap_points():
-	preview.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	preview.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	await get_tree().process_frame
-#	Calculate the aspect ratios and scaling required
+	# Infinite loop prevention
+	var time = Time.get_ticks_msec()
+	if time - last_call_time < 5:
+		await get_tree().process_frame
+		
+	var container_size = preview.get_parent_area_size() / 2.05
 	var source_size := Vector2(float(abs(drawing_size[0]) + abs(drawing_size[1])), float(abs(drawing_size[2]) + abs(drawing_size[3])))
 	var source_aspect_ratio = source_size.x/source_size.y
-	var new_aspect_ratio := float(preview_container.size.x) / preview_container.size.y
-	var new_scale : Vector2
+	var new_aspect_ratio = 1.0
+	var new_size : Vector2
 	
+
 	if new_aspect_ratio > source_aspect_ratio:
-		new_scale = Vector2(source_size.x * (preview_container.size.y / source_size.y), preview_container.size.y)
+		new_size = Vector2(source_size.x * (container_size.x / source_size.y), container_size.x)
 	else:
-		new_scale = Vector2(preview_container.size.x, source_size.y * (preview_container.size.x / source_size.x))
+		new_size = Vector2(container_size.x, source_size.y * (container_size.x / source_size.x))
 		
-	# TODO potentially fix the scaling breaking if setting X min size
-	preview.custom_minimum_size.y = new_scale.y
+
+	preview.custom_minimum_size = new_size
 	
 #	Fit the points into our new mapped and aspect correct container 
 	remapped_points = points.duplicate()
 	for point in range(len(remapped_points)):
-		remapped_points[point].x = remap(remapped_points[point].x, drawing_size[1], drawing_size[0], padding, new_scale.x - padding)
-		remapped_points[point].y = remap(remapped_points[point].y, drawing_size[3], drawing_size[2], padding, new_scale.y - padding)
-	
-	preview.size_flags_vertical = Control.SIZE_FILL
-	redraw = true
-	queue_redraw()
+		remapped_points[point].x = remap(remapped_points[point].x, drawing_size[1], drawing_size[0], padding, new_size.x - padding)
+		remapped_points[point].y = remap(remapped_points[point].y, drawing_size[3], drawing_size[2], padding, new_size.y - padding)
+	last_call_time = time
 
 
-#TODO #21 should be fixed
 func _draw():
-	if points:
-		if redraw:
-			draw_polyline(remapped_points, graph.color, graph.width, true)
-			redraw = false
-		else:
-			remap_points()
+	if remapped_points:
+		draw_polyline(remapped_points, graph.color, graph.width, true)
 

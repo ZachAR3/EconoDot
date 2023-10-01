@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ct0syn32mxtou"]
 
-[ext_resource type="Script" path="res://Scripts/OptionsPanel.gd" id="1_bfy1o"]
+[ext_resource type="Script" path="res://Scripts/OptionsPanel.gd" id="1_sw6g4"]
 [ext_resource type="PackedScene" uid="uid://kwo42inropgq" path="res://Scenes/ResizeableBar.tscn" id="2_t6xl1"]
 
 [node name="OptionsPanel" type="PanelContainer" node_paths=PackedStringArray("graph_container", "x_coords", "y_coords", "control_points_visible", "grid_container", "horizontal_gap", "vertical_gap", "axis_container", "horizontal_offset", "vertical_offset")]
@@ -14,7 +14,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_force_pass_scroll_events = false
-script = ExtResource("1_bfy1o")
+script = ExtResource("1_sw6g4")
 graph_container = NodePath("HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions")
 x_coords = NodePath("HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/XCoordsContainer/XCoords")
 y_coords = NodePath("HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/YCoordsContainer/YCoords")
@@ -34,6 +34,7 @@ layout_mode = 2
 layout_mode = 2
 root = NodePath("../..")
 max_size = 0.83
+min_size = 0.5
 
 [node name="OptionsScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
 layout_mode = 2
