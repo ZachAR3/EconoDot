@@ -2,6 +2,7 @@ extends Node2D
 
 
 @export var settings_popup : PopupPanel
+@export var main_camera : Camera2D
 
 @onready var graphs_explorer = %GraphsPreview
 @onready var graphs_list = %GraphsList
@@ -24,18 +25,24 @@ extends Node2D
 func _ready():
 	get_tree().get_root().files_dropped.connect(file_dropped)
 
-
 func export_graph():
 	if len(Globals.graphs) > 0:
 		var start_pos := Vector2(start_x.value, start_y.value)
+		var original_pos = main_camera.global_position
+		var original_size = get_viewport().size
 		var size := Vector2(width.value, height.value)
+		size = size if size != Vector2.ZERO else original_size
+		get_viewport().size = size
+		main_camera.position = start_pos
+		main_camera.camera_moved.emit()
 		%UI.visible = false
 		export_popup.visible = false
 		await get_tree().process_frame
 		await get_tree().process_frame
-		var viewport_transform = get_viewport_transform().origin
-		get_viewport().get_texture().get_image().get_region(Rect2i(viewport_transform.x + start_pos.x, viewport_transform.y - start_pos.y, size.x, size.y)).save_png("res://test.png")
+		get_viewport().get_texture().get_image().save_png("res://test.png")
 		%UI.visible = true
+		main_camera.position = original_pos
+		get_viewport().size = original_size
 
 
 func save_graph(location : String) -> void:

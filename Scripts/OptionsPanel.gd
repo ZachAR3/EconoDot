@@ -45,7 +45,7 @@ func _process(delta):
 		x_coords.set_block_signals(true)
 		y_coords.set_block_signals(true)
 
-		var pivot = Globals.selected_item.pivot_offset.rotated(Globals.selected_item.rotation)
+		var pivot = Globals.selected_item.pivot_offset.rotated(Globals.selected_item.rotation) if Globals.selected_item is DraggableControl else Vector2.ZERO
 		x_coords.value = Globals.selected_item.global_position.x + pivot.x
 		y_coords.value = -Globals.selected_item.global_position.y - pivot.y
 		

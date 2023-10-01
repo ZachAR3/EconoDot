@@ -14,9 +14,10 @@
 [ext_resource type="PackedScene" uid="uid://ct0syn32mxtou" path="res://Scenes/OptionsPanel.tscn" id="11_wygwn"]
 [ext_resource type="PackedScene" uid="uid://bip055fimwire" path="res://Scenes/Settings.tscn" id="13_dql3p"]
 
-[node name="Editor" type="Node2D" node_paths=PackedStringArray("settings_popup", "open_dialog", "save_dialog", "export_popup", "start_x", "start_y", "width", "height")]
+[node name="Editor" type="Node2D" node_paths=PackedStringArray("settings_popup", "main_camera", "open_dialog", "save_dialog", "export_popup", "start_x", "start_y", "width", "height")]
 script = ExtResource("1_32imw")
 settings_popup = NodePath("SettingsPopup")
+main_camera = NodePath("GraphCamera")
 graph_item_scene = ExtResource("2_k3sde")
 label_scene = ExtResource("5_yfy7i")
 open_dialog = NodePath("OpenDialog")
@@ -33,6 +34,9 @@ z_index = 1
 script = ExtResource("1_lv1lg")
 control_point_scene = ExtResource("2_8a8t4")
 
+[node name="GraphCamera" type="Camera2D" parent="."]
+script = ExtResource("3_1qmvv")
+
 [node name="Axis" parent="." instance=ExtResource("3_2nxg0")]
 unique_name_in_owner = true
 
@@ -43,9 +47,6 @@ script = ExtResource("4_j68ae")
 position_vector = Vector2(200, 200)
 verticalColor = Color(0, 0, 0, 1)
 horizontalColor = Color(0, 0, 0, 1)
-
-[node name="GraphCamera" type="Camera2D" parent="."]
-script = ExtResource("3_1qmvv")
 
 [node name="OpenDialog" type="NativeFileDialog" parent="."]
 title = "Open a File"
