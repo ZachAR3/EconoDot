@@ -12,7 +12,7 @@ func _ready():
 
 
 func refresh():
-	var graphs_directory = DirAccess.open(Globals.graphs_directory)
+	var graphs_directory = DirAccess.open(Globals.settings.graphs_directory)
 	for graph_file in graphs_directory.get_files():
 		if graph_file.get_extension() != "ed":
 			continue

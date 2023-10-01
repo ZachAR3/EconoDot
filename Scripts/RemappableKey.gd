@@ -2,10 +2,10 @@ extends Button
 
 
 @export var action : String
+@export var keybind_name : String
 
 
 func _ready():
-	#set_process_unhandled_key_input(false)
 	set_process_unhandled_input(false)
 	display_key()
 
@@ -32,5 +32,7 @@ func _unhandled_input(event):
 func remap_key(event):
 	InputMap.action_erase_events(action)
 	InputMap.action_add_event(action, event)
+	
+	Globals.settings.set(keybind_name, event)
 	
 	text = "%s" % event.as_text()

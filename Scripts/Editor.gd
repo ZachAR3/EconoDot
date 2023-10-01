@@ -28,6 +28,9 @@ extends Node2D
 
 
 func _ready() -> void:
+	# Disables auto quitting so we can save our game before hand
+	get_tree().set_auto_accept_quit(false)
+	
 	get_tree().get_root().files_dropped.connect(file_dropped)
 	get_viewport().size_changed.connect(resized)
 	DisplayServer.window_set_min_size(minimum_window_size)
@@ -164,4 +167,10 @@ func open_settings() -> void:
 
 
 func quit() -> void:
-	get_tree().quit()
+	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
+
+
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		settings_popup.save_settings()
+		get_tree().quit()

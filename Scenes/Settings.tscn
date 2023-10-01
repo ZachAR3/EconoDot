@@ -3,7 +3,8 @@
 [ext_resource type="Script" path="res://Scripts/Settings.gd" id="1_tbtvh"]
 [ext_resource type="PackedScene" uid="uid://bxua4vv8kkjg0" path="res://Scenes/RemappableKey.tscn" id="2_nmoo8"]
 
-[node name="SettingsPopup" type="PopupPanel" node_paths=PackedStringArray("window_mode", "graphs_directory", "background_color", "graph_directory_explorer")]
+[node name="SettingsPopup" type="PopupPanel" node_paths=PackedStringArray("window_mode", "graphs_directory", "background_color", "graph_directory_explorer", "keybinds")]
+process_mode = 1
 size = Vector2i(300, 300)
 visible = true
 script = ExtResource("1_tbtvh")
@@ -11,6 +12,7 @@ window_mode = NodePath("SettingsCenterContainer/SettingsVBox/WindowMode")
 graphs_directory = NodePath("SettingsCenterContainer/SettingsVBox/GraphsDirectory")
 background_color = NodePath("SettingsCenterContainer/SettingsVBox/BackgroundColor")
 graph_directory_explorer = NodePath("GraphDirectoryExplorer")
+keybinds = [NodePath("SettingsCenterContainer/SettingsVBox/KeybindsContainer/AddModeKeybind"), NodePath("SettingsCenterContainer/SettingsVBox/KeybindsContainer/EditModeKeybind"), NodePath("SettingsCenterContainer/SettingsVBox/KeybindsContainer/DeleteKeybind"), NodePath("SettingsCenterContainer/SettingsVBox/KeybindsContainer/MoveKeyind")]
 
 [node name="SettingsCenterContainer" type="ScrollContainer" parent="."]
 offset_left = 4.0
@@ -33,15 +35,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 columns = 2
 
-[node name="SelectKeybindLabel" type="Label" parent="SettingsCenterContainer/SettingsVBox/KeybindsContainer"]
-layout_mode = 2
-text = "Select"
-
-[node name="SelectKeybind" parent="SettingsCenterContainer/SettingsVBox/KeybindsContainer" instance=ExtResource("2_nmoo8")]
-layout_mode = 2
-tooltip_text = "Selection keybind"
-action = "Select"
-
 [node name="AddModeKeybindLabel" type="Label" parent="SettingsCenterContainer/SettingsVBox/KeybindsContainer"]
 layout_mode = 2
 text = "Add mode"
@@ -50,6 +43,7 @@ text = "Add mode"
 layout_mode = 2
 tooltip_text = "Add mode keybind"
 action = "AddMode"
+keybind_name = "add_mode_keybind"
 
 [node name="EditModeKeybindLabel" type="Label" parent="SettingsCenterContainer/SettingsVBox/KeybindsContainer"]
 layout_mode = 2
@@ -59,6 +53,7 @@ text = "Edit mode"
 layout_mode = 2
 tooltip_text = "Edit mode keybind"
 action = "EditMode"
+keybind_name = "edit_mode_keybind"
 
 [node name="DeleteKeybindLabel" type="Label" parent="SettingsCenterContainer/SettingsVBox/KeybindsContainer"]
 layout_mode = 2
@@ -68,6 +63,7 @@ text = "Delete"
 layout_mode = 2
 tooltip_text = "Delete keybind"
 action = "Delete"
+keybind_name = "delete_keybind"
 
 [node name="MoveKeyindLabel" type="Label" parent="SettingsCenterContainer/SettingsVBox/KeybindsContainer"]
 layout_mode = 2
@@ -77,6 +73,7 @@ text = "Move (graph shift)"
 layout_mode = 2
 tooltip_text = "Move (graph shift)"
 action = "Move"
+keybind_name = "move_keybind"
 
 [node name="WindowModeLabel" type="Label" parent="SettingsCenterContainer/SettingsVBox"]
 layout_mode = 2
