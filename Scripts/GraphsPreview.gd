@@ -7,7 +7,6 @@ extends ItemListBase
 var previews := []
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	refresh()
 
@@ -28,6 +27,7 @@ func refresh():
 		
 		add_item(graph.graph.name, graph)
 		previews.append(graph_resource.points)
+		queue_redraw()
 
 
 func _double_clicked(index : int):

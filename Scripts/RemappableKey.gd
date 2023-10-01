@@ -25,7 +25,6 @@ func _button_toggled(enabled):
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		return
-	print(event)
 	remap_key(event)
 	button_pressed = false
 

@@ -1,0 +1,4 @@
+Object(Resource,"resource_local_to_scene":false,"resource_name":"","script":Resource("res://Scripts/GraphResource.gd"),"points":{
+Vector2(0, 0): [Vector2(-30, 0), Vector2(30, 0), false],
+Vector2(0.496521, -400.08): [Vector2(-29.5035, -400.08), Vector2(30.4965, -400.08), false]
+},"color":Color(1, 1, 1, 1),"width":2,"name":"LRAS","visible":true)

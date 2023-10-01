@@ -1,6 +1,0 @@
-Object(Resource,"resource_local_to_scene":false,"resource_name":"","script":Resource("res://Scripts/GraphResource.gd"),"points":{
-Vector2(-250, -200): [Vector2(-280, -200), Vector2(-220, -200), false],
-Vector2(-176, -250): [Vector2(-206, -250), Vector2(-146, -250), false],
-Vector2(-150, 36): [Vector2(-180, 36), Vector2(-120, 36), false],
-Vector2(100, 50): [Vector2(70, 50), Vector2(130, 50), false]
-},"color":Color(0.996078, 0.498039, 0.176471, 1),"width":2,"name":"GraphD")

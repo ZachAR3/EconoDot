@@ -62,4 +62,4 @@ Move={
 
 [rendering]
 
-environment/defaults/default_clear_color=Color(0.137255, 0.239216, 0.301961, 1)
+environment/defaults/default_clear_color=Color(0, 0.0470588, 0.0627451, 1)

@@ -1,0 +1,39 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://dfy2k34rsx656"]
+
+[ext_resource type="StyleBox" uid="uid://bgo2c66bgyqor" path="res://Themes/Dark/Tertiary.tres" id="1_go27a"]
+[ext_resource type="StyleBox" uid="uid://7k07sb70cq16" path="res://Themes/Dark/TertiaryDisabled.tres" id="2_4i6sm"]
+[ext_resource type="StyleBox" uid="uid://d3ri8kt8y5ytu" path="res://Themes/Dark/TertiaryHighlighted.tres" id="2_hknoi"]
+[ext_resource type="StyleBox" uid="uid://v060fw1ayy22" path="res://Themes/Dark/Secondary.tres" id="3_3nq85"]
+[ext_resource type="StyleBox" uid="uid://g0q0w2xelbyc" path="res://Themes/Dark/TertiaryHovered.tres" id="3_squ1j"]
+[ext_resource type="StyleBox" uid="uid://cqd1cmucktphg" path="res://Themes/Dark/TertiaryNoMargins.tres" id="5_o1utr"]
+[ext_resource type="StyleBox" uid="uid://c4qp74voakt1p" path="res://Themes/Dark/TertiaryNonRounded.tres" id="6_xq2xf"]
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_disabled_color = Color(0.054902, 0.054902, 0.054902, 0.501961)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
+Button/styles/disabled = ExtResource("2_4i6sm")
+Button/styles/focus = ExtResource("2_hknoi")
+Button/styles/hover = ExtResource("3_squ1j")
+Button/styles/normal = ExtResource("1_go27a")
+ColorPickerButton/styles/disabled = ExtResource("5_o1utr")
+ColorPickerButton/styles/focus = ExtResource("5_o1utr")
+ColorPickerButton/styles/hover = ExtResource("5_o1utr")
+ColorPickerButton/styles/normal = ExtResource("5_o1utr")
+ColorPickerButton/styles/pressed = ExtResource("5_o1utr")
+HSplitContainer/constants/autohide = 0
+Label/colors/font_color = Color(1, 1, 1, 1)
+LineEdit/colors/font_color = Color(1, 1, 1, 1)
+LineEdit/colors/font_uneditable_color = Color(0.901961, 0.901961, 0.901961, 0.54902)
+LineEdit/styles/focus = ExtResource("2_hknoi")
+LineEdit/styles/normal = ExtResource("1_go27a")
+LineEdit/styles/read_only = ExtResource("2_4i6sm")
+OptionButton/styles/hover_mirrored = ExtResource("1_go27a")
+OptionButton/styles/normal = ExtResource("1_go27a")
+OptionButton/styles/normal_mirrored = ExtResource("1_go27a")
+Panel/styles/panel = ExtResource("3_3nq85")
+PanelContainer/styles/panel = ExtResource("3_3nq85")
+PopupMenu/styles/hover = ExtResource("3_squ1j")
+PopupMenu/styles/panel = ExtResource("6_xq2xf")
+PopupPanel/styles/panel = ExtResource("3_3nq85")
+VSplitContainer/constants/autohide = 0

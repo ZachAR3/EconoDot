@@ -15,7 +15,7 @@ var last_call_time := 0.0
 
 
 func _ready():
-	preview.get_parent().resized.connect(remap_points)
+	preview.get_parent().draw.connect(remap_points)
 
 
 func get_preview():

@@ -55,7 +55,7 @@ func _process(delta):
 
 func coordinates_updated():
 	if is_instance_valid(Globals.selected_item):
-		Globals.selected_item.move(Vector2(x_coords.value, y_coords.value))
+		Globals.selected_item.move(Vector2(x_coords.value, -y_coords.value))
 
 
 

@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://qyi56tyepaot"]
+[gd_scene load_steps=3 format=3 uid="uid://qyi56tyepaot"]
 
+[ext_resource type="Theme" uid="uid://dfy2k34rsx656" path="res://Themes/Dark/DarkTheme.tres" id="1_3resb"]
 [ext_resource type="Script" path="res://Scripts/DraggableLabel.gd" id="1_6ww7v"]
 
 [node name="DraggableLabel" type="LineEdit" node_paths=PackedStringArray("line_edit")]
@@ -10,6 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_3resb")
 alignment = 1
 editable = false
 expand_to_text_length = true

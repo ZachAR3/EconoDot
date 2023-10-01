@@ -9,6 +9,7 @@ radius = 7.0
 [node name="GraphControlHandle" type="Area2D"]
 monitorable = false
 script = ExtResource("1_r623i")
+line_color = Color(0.266667, 0.698039, 0.54902, 1)
 snap = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

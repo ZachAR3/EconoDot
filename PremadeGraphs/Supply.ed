@@ -1,0 +1,4 @@
+Object(Resource,"resource_local_to_scene":false,"resource_name":"","script":Resource("res://Scripts/GraphResource.gd"),"points":{
+Vector2(-250, 250): [Vector2(-280, 250), Vector2(-220, 250), false],
+Vector2(250, -250): [Vector2(220, -250), Vector2(280, -250), false]
+},"color":Color(0.313726, 1, 0.984314, 1),"width":2,"name":"Supply","visible":true)

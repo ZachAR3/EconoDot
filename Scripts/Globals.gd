@@ -8,13 +8,6 @@ var selected_item
 var snappable_axis : Array[AxisResource] = []
 var graphs_directory := "res://PremadeGraphs/"
 
-# Colors
-var primary = Color('#75b9be')
-var secondary = Color('#FE7F2D')
-var trimary = Color('#FCCA46')
-var quadrary = Color('#A1C181')
-var quintupulary = Color('#619B8A')
-
 
 func snap(current_position : Vector2, snap_threshold : int) -> Vector2:
 	var snapped_position := current_position

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://kctlpbwxtd68"]
+[gd_scene load_steps=5 format=3 uid="uid://kctlpbwxtd68"]
 
 [ext_resource type="Script" path="res://Scripts/ItemClass.gd" id="1_ad807"]
+[ext_resource type="Theme" uid="uid://dfy2k34rsx656" path="res://Themes/Dark/DarkTheme.tres" id="1_d64l1"]
 [ext_resource type="Script" path="res://Scripts/GraphPreviewItem.gd" id="2_jbfbq"]
 [ext_resource type="Script" path="res://Scripts/PreviewMaker.gd" id="4_s5rci"]
 
@@ -73,6 +74,7 @@ offset_top = -23.0
 offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
+theme = ExtResource("1_d64l1")
 horizontal_alignment = 1
 
 [node name="Panel" type="Panel" parent="PreviewContainer/PreviewViewport"]
@@ -84,6 +86,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_d64l1")
 metadata/_edit_use_anchors_ = true
 
 [connection signal="double_clicked" from="Item" to="." method="_add_graph"]

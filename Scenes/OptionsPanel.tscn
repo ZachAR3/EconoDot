@@ -49,6 +49,7 @@ size_flags_vertical = 3
 
 [node name="GraphOptionsButton" type="Button" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer"]
 layout_mode = 2
+tooltip_text = "Toggle graph options"
 text = "Graph options"
 
 [node name="GraphOptions" type="VBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer"]
@@ -60,6 +61,8 @@ layout_mode = 2
 
 [node name="GraphVisibleLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/GraphVisible"]
 layout_mode = 2
+tooltip_text = "Sets the selected graphs visibility"
+mouse_filter = 1
 text = "Visibility:"
 
 [node name="GraphVisible" type="CheckButton" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/GraphVisible"]
@@ -72,6 +75,8 @@ layout_mode = 2
 
 [node name="ShowControlPointsLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/ControlPointsVisible"]
 layout_mode = 2
+tooltip_text = "Sets control point visibility"
+mouse_filter = 1
 text = "Show control points"
 
 [node name="ShowControlPoints" type="CheckButton" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/ControlPointsVisible"]
@@ -85,12 +90,13 @@ layout_mode = 2
 [node name="XCoordsLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/XCoordsContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "X:"
+text = "Selected X:"
 
 [node name="XCoords" type="SpinBox" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/XCoordsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+tooltip_text = "Sets the selected items X position"
 min_value = -10000.0
 max_value = 10000.0
 
@@ -100,12 +106,13 @@ layout_mode = 2
 [node name="YCoordsLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/YCoordsContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Y:"
+text = "Selected Y:"
 
 [node name="YCoords" type="SpinBox" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/YCoordsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+tooltip_text = "Sets the selected items Y position"
 min_value = -10000.0
 max_value = 10000.0
 
@@ -115,13 +122,13 @@ layout_mode = 2
 [node name="RotationLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/RotationContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Rotation:"
+text = "Rotation: "
 
 [node name="Rotation" type="SpinBox" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GraphOptions/RotationContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-tooltip_text = "Only works for labels"
+tooltip_text = "Sets the selected items rotation (only applicable for labels)"
 min_value = -360.0
 max_value = 360.0
 
@@ -137,6 +144,7 @@ text = "Thickness"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+tooltip_text = "Sets the selected graphs line width"
 min_value = -1.0
 max_value = 10000.0
 value = 2.0
@@ -153,10 +161,12 @@ text = "Color:"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+tooltip_text = "Sets the selected graphs line color"
 text = "-"
 
 [node name="GridOptionsButton" type="Button" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer"]
 layout_mode = 2
+tooltip_text = "Toggle grid options"
 text = "Grid options"
 
 [node name="GridOptions" type="VBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer"]
@@ -174,12 +184,13 @@ layout_mode = 2
 [node name="XGridDistanceLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/HorizontalGridDistanceContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "X:"
+text = "Vertical gap:     "
 
 [node name="XGridDistance" type="SpinBox" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/HorizontalGridDistanceContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+tooltip_text = "The vertical distance between each horizontal line on the grid"
 min_value = -10000.0
 max_value = 10000.0
 value = 50.0
@@ -190,12 +201,13 @@ layout_mode = 2
 [node name="YGridDistanceLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/VerticalGridDistanceContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Y:"
+text = "Horizontal gap:"
 
 [node name="YGridDistance" type="SpinBox" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/VerticalGridDistanceContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+tooltip_text = "The horizontal distance between each vertical line on the grid"
 min_value = -10000.0
 max_value = 10000.0
 value = 50.0
@@ -212,6 +224,7 @@ text = "Thickness"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+tooltip_text = "Sets the grids line width"
 min_value = -1.0
 max_value = 10000.0
 value = 2.0
@@ -228,6 +241,7 @@ text = "X Color:"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+tooltip_text = "Sets the color of the grids horizontal lines"
 text = "-"
 
 [node name="VerticalGridColorContainer" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions"]
@@ -242,15 +256,17 @@ text = "Y Color:"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+tooltip_text = "Sets the color of the grids vertical lines"
 text = "-"
 
 [node name="GridHorizontalEnabled" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions"]
 layout_mode = 2
+tooltip_text = "Controls whether the horizontal grid lines are enabled"
 
 [node name="EnabledLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/GridHorizontalEnabled"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "X Enabled"
+text = "Horizontal Enabled"
 
 [node name="EnabledButton" type="CheckButton" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/GridHorizontalEnabled"]
 layout_mode = 2
@@ -260,11 +276,12 @@ button_pressed = true
 
 [node name="GridVerticalEnabled" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions"]
 layout_mode = 2
+tooltip_text = "Controls whether the vertical grid lines are enabled"
 
 [node name="EnabledLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/GridVerticalEnabled"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Y Enabled"
+text = "Vertical Enabled"
 
 [node name="EnabledButton" type="CheckButton" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/GridOptions/GridVerticalEnabled"]
 layout_mode = 2
@@ -274,6 +291,7 @@ button_pressed = true
 
 [node name="AxisOptionsButton" type="Button" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer"]
 layout_mode = 2
+tooltip_text = "Toggle axis options"
 text = "Axis options"
 
 [node name="AxisOptions" type="VBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer"]
@@ -287,6 +305,7 @@ horizontal_alignment = 1
 
 [node name="AxisHorizontalOffsetContainer" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions"]
 layout_mode = 2
+tooltip_text = "Controls the axis horizontal offset"
 
 [node name="AxisHorizontalOffsetLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisHorizontalOffsetContainer"]
 layout_mode = 2
@@ -302,6 +321,7 @@ max_value = 10000.0
 
 [node name="AxisVerticalOffsetContainer" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions"]
 layout_mode = 2
+tooltip_text = "Controls the axis vertical offset"
 
 [node name="AxisVerticalOffsetLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisVerticalOffsetContainer"]
 layout_mode = 2
@@ -317,6 +337,7 @@ max_value = 10000.0
 
 [node name="AxisThicknessContainer" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions"]
 layout_mode = 2
+tooltip_text = "Controls the line width of the axis."
 
 [node name="AxisThicknessLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisThicknessContainer"]
 layout_mode = 2
@@ -333,11 +354,12 @@ value = 2.0
 
 [node name="AxisHorizontalGridColorContainer" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions"]
 layout_mode = 2
+tooltip_text = "Controls the color of the horizontal grid lines."
 
 [node name="ColorLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisHorizontalGridColorContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "X Color:"
+text = "Horizontal color:"
 
 [node name="ColorPicker" type="ColorPickerButton" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisHorizontalGridColorContainer"]
 layout_mode = 2
@@ -347,11 +369,12 @@ text = "-"
 
 [node name="AxisVerticalGridColorContainer" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions"]
 layout_mode = 2
+tooltip_text = "Controls the color of the vertical grid lines"
 
 [node name="ColorLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisVerticalGridColorContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Y Color:"
+text = "Vertical color:     "
 
 [node name="ColorPicker" type="ColorPickerButton" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisVerticalGridColorContainer"]
 layout_mode = 2
@@ -361,11 +384,12 @@ text = "-"
 
 [node name="AxisHorizontalEnabled" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions"]
 layout_mode = 2
+tooltip_text = "Controls whether the grids horizontal line is enabled"
 
 [node name="EnabledLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisHorizontalEnabled"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "X Enabled"
+text = "Horizontal enabled"
 
 [node name="EnabledButton" type="CheckButton" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisHorizontalEnabled"]
 layout_mode = 2
@@ -375,11 +399,12 @@ button_pressed = true
 
 [node name="AxisVerticalEnabled" type="HBoxContainer" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions"]
 layout_mode = 2
+tooltip_text = "Controls whether the grids vertical line is enabled"
 
 [node name="EnabledLabel" type="Label" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisVerticalEnabled"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Y Enabled"
+text = "Vertical enabled"
 
 [node name="EnabledButton" type="CheckButton" parent="HBoxContainer/OptionsScrollContainer/OptionsContainer/AxisOptions/AxisVerticalEnabled"]
 layout_mode = 2

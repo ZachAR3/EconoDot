@@ -88,7 +88,6 @@ func add_point(point_position := Vector2.INF):
 
 
 func remove_point(point):
-	print("remove point")
 	if point in Globals.graphs[Globals.selected_graph].points:
 		Globals.graphs[Globals.selected_graph].points.erase(point)
 		point.queue_free()
