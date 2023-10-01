@@ -74,12 +74,13 @@ func remap_points():
 #	Fit the points into our new mapped and aspect correct container 
 	remapped_points = points.duplicate()
 	for point in range(len(remapped_points)):
-		remapped_points[point].x = remap(remapped_points[point].x, drawing_size[1], drawing_size[0], padding, new_size.x - padding)
-		remapped_points[point].y = remap(remapped_points[point].y, drawing_size[3], drawing_size[2], padding, new_size.y - padding)
+		remapped_points[point].x = remap(remapped_points[point].x, drawing_size[1], max(drawing_size[0], graph.width), padding, new_size.x - padding)
+		remapped_points[point].y = remap(remapped_points[point].y, drawing_size[3], max(drawing_size[2], graph.width), padding, new_size.y - padding)
 	last_call_time = time
 
 
 func _draw():
 	if remapped_points:
+		print(graph.name, remapped_points)
 		draw_polyline(remapped_points, graph.color, graph.width, true)
 
