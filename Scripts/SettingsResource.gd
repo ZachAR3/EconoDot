@@ -9,4 +9,4 @@ class_name SettingsResource
 @export var move_keybind : InputEvent
 @export var window_mode := 0
 @export var background_color := Color("000c10")
-@export var graphs_directory := "res://PremadeGraphs/"
+@export var graphs_directory := ""

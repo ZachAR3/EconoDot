@@ -16,3 +16,6 @@ data_*/
 mono_crash.*.json
 =======
 >>>>>>> b0af3d2 (First commit with a basic controller for linear lines with bezier modifiers)
+
+# Custom
+exports/

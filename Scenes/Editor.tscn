@@ -278,9 +278,8 @@ text = "Export"
 title = "Save your graph"
 filters = PackedStringArray("*.png ; PNG", "* ; All")
 
-[node name="SettingsPopup" parent="UI/UIContainer" node_paths=PackedStringArray("graph_directory_explorer") instance=ExtResource("13_dql3p")]
+[node name="SettingsPopup" parent="UI/UIContainer" instance=ExtResource("13_dql3p")]
 visible = false
-graph_directory_explorer = NodePath("../../../OpenDialog")
 
 [connection signal="file_selected" from="OpenDialog" to="." method="load_graph"]
 [connection signal="file_selected" from="SaveDialog" to="." method="save_graph"]

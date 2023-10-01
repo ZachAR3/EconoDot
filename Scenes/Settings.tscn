@@ -5,7 +5,7 @@
 
 [node name="SettingsPopup" type="PopupPanel" node_paths=PackedStringArray("window_mode", "graphs_directory", "background_color", "graph_directory_explorer", "keybinds")]
 process_mode = 1
-size = Vector2i(300, 300)
+size = Vector2i(480, 480)
 visible = true
 script = ExtResource("1_tbtvh")
 window_mode = NodePath("SettingsCenterContainer/SettingsVBox/WindowMode")
@@ -17,8 +17,8 @@ keybinds = [NodePath("SettingsCenterContainer/SettingsVBox/KeybindsContainer/Add
 [node name="SettingsCenterContainer" type="ScrollContainer" parent="."]
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 296.0
-offset_bottom = 296.0
+offset_right = 476.0
+offset_bottom = 476.0
 
 [node name="SettingsVBox" type="VBoxContainer" parent="SettingsCenterContainer"]
 layout_mode = 2
@@ -109,10 +109,12 @@ horizontal_alignment = 1
 [node name="GraphsDirectory" type="Button" parent="SettingsCenterContainer/SettingsVBox"]
 layout_mode = 2
 tooltip_text = "Sets the directory graphs are imported from"
+text = "/"
 
 [node name="GraphDirectoryExplorer" type="NativeFileDialog" parent="."]
-title = "Open a Directory"
+title = "Open a Directorydasd"
 file_mode = 2
+access = 2
 
 [connection signal="item_selected" from="SettingsCenterContainer/SettingsVBox/WindowMode" to="." method="update_window_mode"]
 [connection signal="color_changed" from="SettingsCenterContainer/SettingsVBox/BackgroundColor" to="." method="background_color_changed"]

@@ -5,7 +5,7 @@ extends PopupPanel
 @export var graphs_directory : Button
 @export var background_color : ColorPickerButton
 @export var graph_directory_explorer : NativeFileDialog
-@export_dir var settings_save_path := "res://settings.ini"
+@export_dir var settings_save_path := "user://settings.ini"
 @export var keybinds : Array[Button]
 
 

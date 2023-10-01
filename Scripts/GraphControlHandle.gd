@@ -26,7 +26,7 @@ func selection_updated(selected : bool):
 func move(new_position : Vector2):
 	enabled = true
 	global_position = new_position
-	#opposite_handle.position = -position
+	opposite_handle.position = -position
 	
 	moved.emit()
 	
