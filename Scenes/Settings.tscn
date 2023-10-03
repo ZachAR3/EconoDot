@@ -12,7 +12,7 @@ window_mode = NodePath("SettingsCenterContainer/SettingsVBox/WindowMode")
 graphs_directory = NodePath("SettingsCenterContainer/SettingsVBox/GraphsDirectory")
 background_color = NodePath("SettingsCenterContainer/SettingsVBox/BackgroundColor")
 graph_directory_explorer = NodePath("GraphDirectoryExplorer")
-keybinds = [NodePath("SettingsCenterContainer/SettingsVBox/KeybindsContainer/AddModeKeybind"), NodePath("SettingsCenterContainer/SettingsVBox/KeybindsContainer/EditModeKeybind"), NodePath("SettingsCenterContainer/SettingsVBox/KeybindsContainer/DeleteKeybind"), NodePath("SettingsCenterContainer/SettingsVBox/KeybindsContainer/MoveKeyind")]
+keybinds = [NodePath("SettingsCenterContainer/SettingsVBox/KeybindsContainer/AddModeKeybind"), NodePath("SettingsCenterContainer/SettingsVBox/KeybindsContainer/EditModeKeybind"), NodePath("SettingsCenterContainer/SettingsVBox/KeybindsContainer/DeleteKeybind"), NodePath("SettingsCenterContainer/SettingsVBox/KeybindsContainer/MoveKeyind"), NodePath("SettingsCenterContainer/SettingsVBox/KeybindsContainer/PanKeybind")]
 
 [node name="SettingsCenterContainer" type="ScrollContainer" parent="."]
 offset_left = 4.0
@@ -75,6 +75,16 @@ tooltip_text = "Move (graph shift)"
 action = "Move"
 keybind_name = "move_keybind"
 
+[node name="PanKeybindLabel" type="Label" parent="SettingsCenterContainer/SettingsVBox/KeybindsContainer"]
+layout_mode = 2
+text = "Pan"
+
+[node name="PanKeybind" parent="SettingsCenterContainer/SettingsVBox/KeybindsContainer" instance=ExtResource("2_nmoo8")]
+layout_mode = 2
+tooltip_text = "Held while moving the mouse to pan around the scene"
+action = "Pan"
+keybind_name = "pan_keybind"
+
 [node name="WindowModeLabel" type="Label" parent="SettingsCenterContainer/SettingsVBox"]
 layout_mode = 2
 text = "Window mode"
@@ -112,7 +122,7 @@ tooltip_text = "Sets the directory graphs are imported from"
 text = "/"
 
 [node name="GraphDirectoryExplorer" type="NativeFileDialog" parent="."]
-title = "Open a Directorydasd"
+title = "Open a Directory"
 file_mode = 2
 access = 2
 
